@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mariu\\OneDrive\\Desktop\\ECAM BAC3\\PO3L C#\\ChessMaster\\ChessMaster\\ChessMaster\\ChessMaster.csproj": {}
+    "C:\\Users\\STUDENT\\Documents\\Prograaaaa\\C#\\ChessMastaaaa\\ChessMaster\\ChessMaster\\ChessMaster.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mariu\\OneDrive\\Desktop\\ECAM BAC3\\PO3L C#\\ChessMaster\\ChessMaster\\ChessMaster\\ChessMaster.csproj": {
+    "C:\\Users\\STUDENT\\Documents\\Prograaaaa\\C#\\ChessMastaaaa\\ChessMaster\\ChessMaster\\ChessMaster.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mariu\\OneDrive\\Desktop\\ECAM BAC3\\PO3L C#\\ChessMaster\\ChessMaster\\ChessMaster\\ChessMaster.csproj",
+        "projectUniqueName": "C:\\Users\\STUDENT\\Documents\\Prograaaaa\\C#\\ChessMastaaaa\\ChessMaster\\ChessMaster\\ChessMaster.csproj",
         "projectName": "ChessMaster",
-        "projectPath": "C:\\Users\\mariu\\OneDrive\\Desktop\\ECAM BAC3\\PO3L C#\\ChessMaster\\ChessMaster\\ChessMaster\\ChessMaster.csproj",
-        "packagesPath": "C:\\Users\\mariu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mariu\\OneDrive\\Desktop\\ECAM BAC3\\PO3L C#\\ChessMaster\\ChessMaster\\ChessMaster\\obj\\",
+        "projectPath": "C:\\Users\\STUDENT\\Documents\\Prograaaaa\\C#\\ChessMastaaaa\\ChessMaster\\ChessMaster\\ChessMaster.csproj",
+        "packagesPath": "C:\\Users\\STUDENT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\STUDENT\\Documents\\Prograaaaa\\C#\\ChessMastaaaa\\ChessMaster\\ChessMaster\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mariu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\STUDENT\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
