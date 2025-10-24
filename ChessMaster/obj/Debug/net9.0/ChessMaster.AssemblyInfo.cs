@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ChessMaster")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+85093f804e7bacb65d6299ea6ee485bd13acb314")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+841cce1311b64fb56545013c2bcaaae15e1ce90e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ChessMaster")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ChessMaster")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
