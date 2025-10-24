@@ -1,4 +1,7 @@
 
+using System.Security.Authentication.ExtendedProtection;
+using Avalonia.Controls;
+
 public class Person
 {
     private int id_player;
@@ -14,5 +17,8 @@ public class Person
         this.age = age;
     }
 
-    public 
+    public void Change_first_name()
+    {
+
+    }
 }
