@@ -12,8 +12,9 @@ class Player : Person
         this.elo = elo;
     }
 
-    public void Change_elo(int new_elo)
+    public int Elo
     {
-        elo = new_elo;
+        get { return elo; }
+        set { elo = value; }
     }
 }

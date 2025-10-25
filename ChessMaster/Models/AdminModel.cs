@@ -9,8 +9,9 @@ class Admin : Person
         this.pw = pw;
     }
 
-    public void Change_pw(string new_pw)
+    public string Pw
     {
-        pw = new_pw;
+        get { return pw; }
+        set { pw = value; }
     }
 }
