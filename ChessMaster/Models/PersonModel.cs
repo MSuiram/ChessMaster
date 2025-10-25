@@ -18,9 +18,10 @@ public class Person
         this.born_date = born_date;
     }
 
-    public void Change_first_name(string new_name)
+    public string first_name
     {
-        first_name = new_name;
+        get { return first_name; }
+        set { first_name = value; }
     }
 
     public void Change_last_name(string new_name)
