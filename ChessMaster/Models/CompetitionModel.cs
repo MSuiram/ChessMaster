@@ -18,9 +18,9 @@ public class Competition
     {
         participants.Add(player.ID);
     }
-    private void CreateMatch()
+    private void CreateMatch(long ID, long player_1_ID,long player_2_ID)
     {
-        Match new_match = new Match();
+        Match new_match = new Match(ID,player_1_ID,player_2_ID);
         matches.Add(new_match.ID);
     }
     private void AddWinner(Player player)
