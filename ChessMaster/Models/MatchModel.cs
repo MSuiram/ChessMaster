@@ -7,7 +7,7 @@ public class Match
     public long ID;
     private List<string> coups = new List<string>();
     private long winner_ID;
-    private Match(long ID, long player_1_ID,long player_2_ID)
+    public Match(long ID, long player_1_ID, long player_2_ID)
     {
         this.ID = Convert.ToInt64(DateTime.Now.ToString("yyyymmddhhmmss"));
         players.Add(player_1_ID);
