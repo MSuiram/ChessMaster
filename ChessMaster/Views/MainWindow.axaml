@@ -15,6 +15,16 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    <Grid Background="{DynamicResource ResourceKey=PrimaryBackGround}" ColumnDefinitions="200, *">
+        <Border Grid.Column="0" Padding="20">
+            <Grid RowDefinitions="*,Auto">
+                <StackPanel Grid.Row="0">
+                    <TextBlock>Yop</TextBlock>
+                    <Button Content="Player" HorizontalAlignment="Stretch"></Button>
+                    <Button Content="Compétition" HorizontalAlignment="Stretch"></Button>
+                    <Button Content="Classement" HorizontalAlignment="Stretch"></Button>
+                </StackPanel>    
+            </Grid>
+        </Border>
+    </Grid>
 </Window>
