@@ -1,11 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SQLite;
-using System.IO.Pipelines;
-using Avalonia.Automation.Peers;
-using Avalonia.Controls;
-using Microsoft.Data.Sqlite;
-using Tmds.DBus.Protocol;
+
 
 public static class Connexion
 {
@@ -18,6 +14,8 @@ public static class Connexion
     {
         return new SQLiteConnection(key);
     }
+
+
     /// <summary>
     /// exécute une commmande SQL non_query!
     /// </summary>
@@ -31,6 +29,7 @@ public static class Connexion
             cmd.ExecuteNonQuery();
         }
     }
+    
     /// <summary>
     /// retourne une Table avec la data demandée par la query
     /// </summary>
@@ -44,6 +43,8 @@ public static class Connexion
             var cmd = new SQLiteCommand(query, conn);
             SQLiteDataReader reader;
             reader = cmd.ExecuteReader();
+
+
             var result = new DataTable();
             result.Load(reader);
             return result;
