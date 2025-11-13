@@ -16,21 +16,21 @@ public class Competition
     }
     private void AddPlayer(Player player)
     {
-        participants.Add(player.ID);
+        participants.Add(player.Id_person);
     }
-    private void CreateMatch(long ID, long player_1_ID,long player_2_ID)
+    private void CreateMatch(long ID, long player_1_ID, long player_2_ID)
     {
-        Match new_match = new Match(ID,player_1_ID,player_2_ID);
+        Match new_match = new Match(ID, player_1_ID, player_2_ID);
         matches.Add(new_match.ID);
     }
     private void AddWinner(Player player)
     {
-        winner_ID = player.ID;
+        winner_ID = player.Id_person;
     }
     private void CloseCompetition()
     {
         ///mise a jour de la compétition dans la DB
     }
 
-    
+
 }

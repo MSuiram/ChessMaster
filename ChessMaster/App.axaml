@@ -11,5 +11,10 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://ChessMaster/Styles/AppDefaultStyles.axaml"></StyleInclude>
     </Application.Styles>
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="PrimaryBackGround" Color="#EE6983"></SolidColorBrush>
+    </Application.Resources>
 </Application>
