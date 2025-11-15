@@ -15,16 +15,35 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <Grid Background="{DynamicResource ResourceKey=PrimaryBackGround}" ColumnDefinitions="200, *">
-        <Border Grid.Column="0" Padding="20">
+    <Grid Background="{DynamicResource ResourceKey=PrimaryBackGround}" ColumnDefinitions="Auto, *">
+        <Border Grid.Column="0" Padding="20" Background="Aqua">
             <Grid RowDefinitions="*,Auto">
-                <StackPanel Grid.Row="0">
-                    <TextBlock>Yop</TextBlock>
-                    <Button Content="Player" HorizontalAlignment="Stretch"></Button>
-                    <Button Content="Compétition" HorizontalAlignment="Stretch"></Button>
-                    <Button Content="Classement" HorizontalAlignment="Stretch"></Button>
+                <StackPanel Grid.Row="0" Spacing="12">
+                    <StackPanel Orientation="Horizontal">
+                        <Image PointerPressed="Image_PointerPressed" Classes="icon" Source="/Assets/Images/crown-cross-fill.png"></Image>
+                        <TextBlock FontSize="30" IsVisible="{Binding SideMenuExpanded}">ChessMaster</TextBlock>
+                    </StackPanel>
+                    <Button HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Classes="icon" Source="/Assets/Images/person-arms-spread-fill.png"></Image>
+                            <Label Content="Player" IsVisible="{Binding SideMenuExpanded}"></Label>
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Classes="icon" Source="/Assets/Images/flag-fill.png"></Image>
+                            <Label Content="Compétition" IsVisible="{Binding SideMenuExpanded}"></Label>
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Classes="icon" Source="/Assets/Images/ranking-fill.png"></Image>
+                            <Label Content="Classement" IsVisible="{Binding SideMenuExpanded}"></Label>
+                        </StackPanel>
+                    </Button>
                 </StackPanel>    
             </Grid>
         </Border>
+        
     </Grid>
 </Window>

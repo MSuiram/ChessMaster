@@ -7,15 +7,19 @@
     </Design.PreviewWith>
 
     <Style Selector="Button">
-        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="Background" Value="{DynamicResource ResourceKey=PrimaryBackGround}"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
 
     <Style Selector="Button:pointerover /template/ ContentPresenter">
-        <Setter Property="FontSize" Value="20"></Setter>
+        <Setter Property="FontSize" Value="30"></Setter>
         <Setter Property="Background" Value="Black"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
+    </Style>
+    
+    <Style Selector="Image.icon">
+        <Setter Property="Width" Value="35"></Setter>
     </Style>
 
 </Styles>
