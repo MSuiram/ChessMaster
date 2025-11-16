@@ -16,5 +16,6 @@
 
     <Application.Resources>
         <SolidColorBrush x:Key="PrimaryBackGround" Color="#EE6983"></SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryActiveBackGround" Color="#6633dd"></SolidColorBrush>
     </Application.Resources>
 </Application>
