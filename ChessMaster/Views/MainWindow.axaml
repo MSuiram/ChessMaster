@@ -25,6 +25,12 @@
                     </StackPanel>
                     <Button HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal">
+                            <Image Classes="icon" Source="/Assets/Images/house-fill.png"></Image>
+                            <Label Content="Home" IsVisible="{Binding SideMenuExpanded}"></Label>
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal">
                             <Image Classes="icon" Source="/Assets/Images/person-arms-spread-fill.png"></Image>
                             <Label Content="Player" IsVisible="{Binding SideMenuExpanded}"></Label>
                         </StackPanel>
