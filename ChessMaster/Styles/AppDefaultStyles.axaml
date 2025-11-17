@@ -1,29 +1,28 @@
-<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-            <Button Content="Hello World"></Button>
+            <Button Content="Hello World" />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="Button">
-        <Setter Property="FontSize" Value="30"></Setter>
-        <Setter Property="Background" Value="{DynamicResource ResourceKey=PrimaryBackGround}"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
+    <Style Selector="Button.MenuButton">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Background" Value="{DynamicResource ResourceKey=PrimaryBackGround}" />
+        <Setter Property="Foreground" Value="White" />
     </Style>
 
-    <Style Selector="Button:pointerover /template/ ContentPresenter">
-        <Setter Property="FontSize" Value="30"></Setter>
-        <Setter Property="Background" Value="Black"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
+    <Style Selector="Button.MenuButton:pointerover /template/ ContentPresenter">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Background" Value="Black" />
+        <Setter Property="Foreground" Value="White" />
     </Style>
 
-    <Style Selector="Button.active /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource PrimaryActiveBackGround}"></Setter>
+    <Style Selector="Button.MenuButton.active /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource PrimaryActiveBackGround}" />
     </Style>
-    
+
     <Style Selector="Image.icon">
-        <Setter Property="Width" Value="35"></Setter>
+        <Setter Property="Width" Value="35" />
     </Style>
 
 </Styles>

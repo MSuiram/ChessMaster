@@ -1,59 +1,86 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:ChessMaster.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="ChessMaster.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        xmlns:view="using:ChessMaster.Views"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="ChessMaster">
+<Window
+    x:Class="ChessMaster.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:view="using:ChessMaster.Views"
+    xmlns:vm="using:ChessMaster.ViewModels"
+    Title="ChessMaster"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
+        <vm:MainWindowViewModel />
     </Design.DataContext>
 
     <Grid Background="{DynamicResource ResourceKey=PrimaryBackGround}" ColumnDefinitions="Auto, *">
 
-        <ContentControl Grid.Column="1" Content="{Binding CurrentPage}"></ContentControl>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
 
-        <Border Grid.Column="0" Padding="20" Background="Aqua">
+        <Border
+            Grid.Column="0"
+            Padding="20"
+            Background="Aqua">
             <Grid RowDefinitions="*,Auto">
                 <StackPanel Grid.Row="0" Spacing="12">
                     <StackPanel Orientation="Horizontal">
-                        <Image PointerPressed="Image_PointerPressed" Classes="icon" Source="/Assets/Images/crown-cross-fill.png"></Image>
+                        <Image
+                            Classes="icon"
+                            PointerPressed="Image_PointerPressed"
+                            Source="/Assets/Images/crown-cross-fill.png" />
                         <TextBlock FontSize="30" IsVisible="{Binding SideMenuExpanded}">ChessMaster</TextBlock>
                     </StackPanel>
-                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding HomePageIsActive}" Command="{Binding GoToHomeCommand}">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        Classes="MenuButton"
+                        Classes.active="{Binding HomePageIsActive}"
+                        Command="{Binding GoToHomeCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Classes="icon" Source="/Assets/Images/house-fill.png"></Image>
-                            <Label Content="Home" IsVisible="{Binding SideMenuExpanded}"></Label>
+                            <Image Classes="icon" Source="/Assets/Images/house-fill.png" />
+                            <Label Content="Home" IsVisible="{Binding SideMenuExpanded}" />
                         </StackPanel>
                     </Button>
-                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding PlayerPageIsActive}" Command="{Binding GoToPlayerCommand}">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        Classes="MenuButton"
+                        Classes.active="{Binding PlayerPageIsActive}"
+                        Command="{Binding GoToPlayerCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Classes="icon" Source="/Assets/Images/person-arms-spread-fill.png"></Image>
-                            <Label Content="Player" IsVisible="{Binding SideMenuExpanded}"></Label>
+                            <Image Classes="icon" Source="/Assets/Images/person-arms-spread-fill.png" />
+                            <Label Content="Player" IsVisible="{Binding SideMenuExpanded}" />
                         </StackPanel>
                     </Button>
-                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding CompetitionPageIsActive}" Command="{Binding GoToCompetitionCommand}">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        Classes="MenuButton"
+                        Classes.active="{Binding CompetitionPageIsActive}"
+                        Command="{Binding GoToCompetitionCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Classes="icon" Source="/Assets/Images/flag-fill.png"></Image>
-                            <Label Content="Compétition" IsVisible="{Binding SideMenuExpanded}"></Label>
+                            <Image Classes="icon" Source="/Assets/Images/flag-fill.png" />
+                            <Label Content="Compétition" IsVisible="{Binding SideMenuExpanded}" />
                         </StackPanel>
                     </Button>
-                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding ClassementPageIsActive}" Command="{Binding GoToClassementCommand}">
+                    <Button
+                        HorizontalAlignment="Stretch"
+                        Classes="MenuButton"
+                        Classes.active="{Binding ClassementPageIsActive}"
+                        Command="{Binding GoToClassementCommand}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Classes="icon" Source="/Assets/Images/ranking-fill.png"></Image>
-                            <Label Content="Classement" IsVisible="{Binding SideMenuExpanded}"></Label>
+                            <Image Classes="icon" Source="/Assets/Images/ranking-fill.png" />
+                            <Label Content="Classement" IsVisible="{Binding SideMenuExpanded}" />
                         </StackPanel>
                     </Button>
-                </StackPanel>    
+                </StackPanel>
             </Grid>
         </Border>
-        
+
     </Grid>
 </Window>
