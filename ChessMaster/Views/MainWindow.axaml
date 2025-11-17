@@ -45,7 +45,7 @@
                             <Label Content="Compétition" IsVisible="{Binding SideMenuExpanded}"></Label>
                         </StackPanel>
                     </Button>
-                    <Button HorizontalAlignment="Stretch">
+                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding ClassementPageIsActive}" Command="{Binding GoToClassementCommand}">
                         <StackPanel Orientation="Horizontal">
                             <Image Classes="icon" Source="/Assets/Images/ranking-fill.png"></Image>
                             <Label Content="Classement" IsVisible="{Binding SideMenuExpanded}"></Label>

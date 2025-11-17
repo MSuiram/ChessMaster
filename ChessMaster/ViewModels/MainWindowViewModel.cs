@@ -12,23 +12,26 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HomePageIsActive))]
     [NotifyPropertyChangedFor(nameof(PlayerPageIsActive))]
+    [NotifyPropertyChangedFor(nameof(ClassementPageIsActive))]
     private ViewModelBase _currentPage;
 
     public bool HomePageIsActive => CurrentPage == _homePage;
-    public bool PlayerPageIsActive => CurrentPage == _playerPage; 
+    public bool PlayerPageIsActive => CurrentPage == _playerPage;
+    public bool ClassementPageIsActive => CurrentPage == _classementPage;
 
-    private readonly HomePageViewModel _homePage = new ();
-    private readonly PlayerPageViewModel _playerPage = new ();  
+    private readonly HomePageViewModel _homePage = new();
+    private readonly PlayerPageViewModel _playerPage = new();
+    private readonly ClassementPageViewModel _classementPage = new();
 
     public MainWindowViewModel()
     {
-       CurrentPage = _homePage; 
+        CurrentPage = _homePage;
     }
 
     [RelayCommand]
     private void SideMenuResize()
     {
-        SideMenuExpanded =! SideMenuExpanded;
+        SideMenuExpanded = !SideMenuExpanded;
     }
 
     [RelayCommand]
@@ -36,5 +39,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [RelayCommand]
     private void GoToPlayer() => CurrentPage = _playerPage;
-    
+
+    [RelayCommand]
+    private void GoToClassement() => CurrentPage = _classementPage;
 }
