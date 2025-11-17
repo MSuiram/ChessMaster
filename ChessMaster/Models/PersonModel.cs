@@ -29,13 +29,13 @@ public class Person
         set { first_name = value; }
     }
 
-        public string Last_name
+    public string Last_name
     {
         get { return last_name; }
         set { last_name = value; }
     }
 
-        public DateOnly Born_date
+    public DateOnly Born_date
     {
         get { return born_date; }
         set { born_date = value; }

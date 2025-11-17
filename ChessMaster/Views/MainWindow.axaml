@@ -39,7 +39,7 @@
                             <Label Content="Player" IsVisible="{Binding SideMenuExpanded}"></Label>
                         </StackPanel>
                     </Button>
-                    <Button HorizontalAlignment="Stretch">
+                    <Button HorizontalAlignment="Stretch" Classes.active="{Binding CompetitionPageIsActive}" Command="{Binding GoToCompetitionCommand}">
                         <StackPanel Orientation="Horizontal">
                             <Image Classes="icon" Source="/Assets/Images/flag-fill.png"></Image>
                             <Label Content="Compétition" IsVisible="{Binding SideMenuExpanded}"></Label>
