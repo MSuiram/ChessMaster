@@ -13,19 +13,20 @@
         <Grid ColumnDefinitions="300, 300" RowDefinitions="70,70,70" HorizontalAlignment="Center" ColumnSpacing="15">
             <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Height="75">
                 <Label Margin="5" >Nom:</Label>
-                <TextBox  Watermark="Enter le nom"/>
+                <TextBox Text="{Binding LastName}" Watermark="Enter le nom"/>
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" Height="75">
                 <Label Margin="5" >Prénom:</Label>
-                <TextBox  Watermark="Enter le prénom"/>
+                <TextBox Text="{Binding FirstName}" Watermark="Enter le prénom"/>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" HorizontalAlignment="Stretch" Height="75">
                 <Label Margin="5" >ID:</Label>
-                <TextBox  Watermark="Enter l'ID"/>
+                <TextBox Text="{Binding Id}" Watermark="Enter l'ID"/>
             </StackPanel>
-            <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="35">Chercher</Button>
+            <Button Command="{Binding GetNameCommand}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="35">Chercher</Button>
         </Grid>
         </Border>
+        <Label Grid.Row="1" Content="{Binding Test}"></Label>
     </Grid>
     </Border>
 </UserControl>
