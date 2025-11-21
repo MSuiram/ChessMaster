@@ -4,26 +4,34 @@ using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using ChessMaster.ViewModels;
 
 
 namespace ChessMaster.ViewModels;
 
 public partial class PlayerPageViewModel : ViewModelBase
 {
+    public ObservableCollection<PlayerItemViewModel> PlayerItems { get; } = new ObservableCollection<PlayerItemViewModel>();
 
     [ObservableProperty]
-    private string? _lastname;
-    [ObservableProperty]
+    private string? _lastName;
 
-    private string? _firstname;
     [ObservableProperty]
+    private string? _firstName;
 
+    [ObservableProperty]
     private string? _id;
 
     [ObservableProperty]
-    private string? _test = "e";
+    private string? _test;
+
 
     [RelayCommand]
-    private void GetName() => Test = Lastname;
+    private void GetName()
+    {
+        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName });
+
+        LastName = null;
+    }
 
 }

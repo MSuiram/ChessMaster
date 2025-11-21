@@ -26,7 +26,17 @@
             <Button Command="{Binding GetNameCommand}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="35">Chercher</Button>
         </Grid>
         </Border>
-        <Label Grid.Row="1" Content="{Binding Test}"></Label>
+        <Border Grid.Row="1">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding PlayerItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:PlayerItemViewModel">
+                            <Label Content="{Binding LastName}"></Label>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
     </Grid>
     </Border>
 </UserControl>
