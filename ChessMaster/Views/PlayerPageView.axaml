@@ -8,7 +8,7 @@
             x:Class="ChessMaster.Views.PlayerPageView">
     <Design.DataContext><vm:PlayerPageViewModel></vm:PlayerPageViewModel></Design.DataContext>
     <Border Padding="20">
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, *" RowSpacing="20">
         <Border Grid.Row="0" Padding="20" Background="Brown" CornerRadius="40">
         <Grid ColumnDefinitions="300, 300" RowDefinitions="70,70,70" HorizontalAlignment="Center" ColumnSpacing="15">
             <StackPanel Grid.Column="0" HorizontalAlignment="Stretch" Height="75">
@@ -26,12 +26,18 @@
             <Button Command="{Binding GetNameCommand}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Stretch" Height="35">Chercher</Button>
         </Grid>
         </Border>
-        <Border Grid.Row="1">
+        <Border Grid.Row="1" Padding="20" Background="Brown" CornerRadius="40">
             <ScrollViewer>
                 <ItemsControl ItemsSource="{Binding PlayerItems}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="vm:PlayerItemViewModel">
-                            <Label Content="{Binding LastName}"></Label>
+                            <Button HorizontalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Width="100" Content="{Binding LastName}"></Label>
+                                    <Label Width="100" Content="{Binding FirstName}"></Label>
+                                    <Label Width="100" Content="{Binding Id}"></Label>
+                                </StackPanel>
+                            </Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
