@@ -1,6 +1,10 @@
 using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Linq;
+using System.Security.Cryptography;
+using ExCSS;
+using Svg.Model.Drawables.Elements;
 
 
 public static class Connexion
@@ -29,7 +33,7 @@ public static class Connexion
             cmd.ExecuteNonQuery();
         }
     }
-    
+
     /// <summary>
     /// retourne une Table avec la data demandée par la query
     /// </summary>
@@ -50,4 +54,37 @@ public static class Connexion
             return result;
         }
     }
+
+
+    public static DataTable FindCompetition(long? ID, string? name)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Select * from Competition where 1=1";
+
+            if (ID != null)
+            {
+                query += " and ID=@ID";
+                cmd.Parameters.AddWithValue("@ID", ID.ToString());
+            }
+            if (name != "")
+            {
+                query += " and Nom=@name";
+                cmd.Parameters.AddWithValue("@name", name);
+            }
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+        }
+    }
+
+
 }

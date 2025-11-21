@@ -18,34 +18,39 @@
         ColumnDefinitions="*,*,*"
         RowDefinitions="Auto,Auto,Auto"
         ShowGridLines="True">
-
-
-        <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-            <TextBox
-                Width="200"
-                Text="test"
-                Watermark="input" />
-        </StackPanel>
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-            <TextBox
-                Width="200"
-                Text="test"
-                Watermark="input" />
-            <Button
-                Grid.Column="1"
-                Height="25"
-                HorizontalAlignment="Stretch"
-                FontSize="5">
-                Search
-            </Button>
-        </StackPanel>
-        <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-            <TextBox
-                Width="200"
-                Text="test"
-                Watermark="input" />
-        </StackPanel>
-
-
+        <TextBlock Grid.Column="0">ID</TextBlock>
+        <TextBlock Grid.Column="1">Nom</TextBlock>
+        <TextBlock Grid.Column="2">joueur</TextBlock>
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Width="200"
+            HorizontalAlignment="Center"
+            Text="{Binding ID}"
+            Watermark="input" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="200"
+            HorizontalAlignment="Center"
+            Text="{Binding Name}"
+            Watermark="input" />
+        <Button
+            Grid.Row="2"
+            Grid.Column="1"
+            Height="25"
+            HorizontalAlignment="Stretch"
+            Command="{Binding SearchCommand}"
+            FontSize="10">
+            Search
+        </Button>
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="2"
+            Width="200"
+            HorizontalAlignment="Center"
+            Text="{Binding Player}"
+            Watermark="input" />
     </Grid>
+
 </UserControl>
