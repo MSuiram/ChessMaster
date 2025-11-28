@@ -5,6 +5,9 @@ using System.Reflection.Metadata.Ecma335;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ChessMaster.ViewModels;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
+using ChessMaster.Messages;
 
 
 namespace ChessMaster.ViewModels;
@@ -29,12 +32,18 @@ public partial class PlayerPageViewModel : ViewModelBase
     [RelayCommand]
     private void GetName()
     {
-        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id});
+        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id });
         Console.WriteLine("PalyerItems Counter : {0}", PlayerItems.Count);
 
         LastName = null;
         FirstName = null;
         Id = null;
+    }
+
+    [RelayCommand]
+    private async Task OpendWindowPlayerAsync()
+    {
+        var playerwindow = await WeakReferenceMessenger.Default.Send(new WindowPlayerMessage());
     }
 
 }
