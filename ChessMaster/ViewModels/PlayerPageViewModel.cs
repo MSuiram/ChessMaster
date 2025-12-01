@@ -5,6 +5,9 @@ using System.Reflection.Metadata.Ecma335;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ChessMaster.ViewModels;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Messaging;
+using ChessMaster.Messages;
 
 
 namespace ChessMaster.ViewModels;
@@ -35,6 +38,12 @@ public partial class PlayerPageViewModel : ViewModelBase
         LastName = null;
         FirstName = null;
         Id = null;
+    }
+
+    [RelayCommand]
+    private async Task OpendWindowPlayerAsync()
+    {
+        var playerwindow = await WeakReferenceMessenger.Default.Send(new WindowPlayerMessage());
     }
 
 }
