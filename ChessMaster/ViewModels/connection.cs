@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using ExCSS;
@@ -9,7 +10,8 @@ using Svg.Model.Drawables.Elements;
 
 public static class Connexion
 {
-    private static readonly string key = @"Data Source=C:\Users\STUDENT\Documents\Prograaaaa\C#\ChessMastaaaa\ChessMaster\ChessMaster\database.db";
+    static string dbPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\..\ChessMaster\database.db"));
+    private static readonly string key = $@"Data Source={dbPath}";
     /// <summary>
     /// Connexion a la datatbase 
     /// </summary>
@@ -91,21 +93,21 @@ public static class Connexion
         using (var conn = connection())
         {
             var cmd = new SQLiteCommand(conn);
-            string query = "Select * from Player where 1=1";
+            string query = "Select * from Personne where 1=1";
 
-            if (ID != null)
+            if (ID.HasValue)
             {
                 query += " and ID=@ID";
                 cmd.Parameters.AddWithValue("@ID", ID.ToString());
             }
-            if (Nom != "")
+            if (!string.IsNullOrWhiteSpace(Nom))
             {
                 query += " and Nom=@nom";
                 cmd.Parameters.AddWithValue("@nom", Nom);
             }
-            if (Prenom != "")
+            if (!string.IsNullOrWhiteSpace(Prenom))
             {
-                query += " and Nom=@prenom";
+                query += " and Prenom=@prenom";
                 cmd.Parameters.AddWithValue("@prenom", Prenom);
             }
 
