@@ -29,7 +29,7 @@ public partial class PlayerPageViewModel : ViewModelBase
     [RelayCommand]
     private void GetName()
     {
-        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id});
+        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id });
         Console.WriteLine("PalyerItems Counter : {0}", PlayerItems.Count);
 
         LastName = null;
