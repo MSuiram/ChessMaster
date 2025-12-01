@@ -14,20 +14,17 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyPropertyChangedFor(nameof(PlayerPageIsActive))]
     [NotifyPropertyChangedFor(nameof(ClassementPageIsActive))]
     [NotifyPropertyChangedFor(nameof(CompetitionPageIsActive))]
-    [NotifyPropertyChangedFor(nameof(AddPlayerPageIsActive))]
     private ViewModelBase _currentPage;
 
     public bool HomePageIsActive => CurrentPage == _homePage;
     public bool PlayerPageIsActive => CurrentPage == _playerPage;
     public bool ClassementPageIsActive => CurrentPage == _classementPage;
     public bool CompetitionPageIsActive => CurrentPage == _competitionPage;
-    public bool AddPlayerPageIsActive => CurrentPage == _addPlayerPage;
 
     private readonly HomePageViewModel _homePage = new();
     private readonly PlayerPageViewModel _playerPage = new();
     private readonly ClassementPageViewModel _classementPage = new();
     private readonly CompetitionPageViewModel _competitionPage = new();
-    private readonly AddPlayerViewModel _addPlayerPage = new();
 
     public MainWindowViewModel()
     {
@@ -51,6 +48,4 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void GoToCompetition() => CurrentPage = _competitionPage;
 
-    [RelayCommand]
-    private void GoToAddPlayer() => CurrentPage = _addPlayerPage;
 }
