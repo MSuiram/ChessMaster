@@ -24,6 +24,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
         DataTable result = Connexion.FindCompetition(ID, Name);
         foreach (DataRow row in result.Rows)
         {
+            Console.WriteLine(row["Nom"]);
             CompetitionItems.Add(new CompetitionItemViewModel() { Name = row["Nom"].ToString(), ID = Convert.ToInt64(row["ID"]), Winner = Convert.ToInt64(row["Winner_ID"]) });
 
         }

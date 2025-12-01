@@ -63,12 +63,12 @@ public static class Connexion
             var cmd = new SQLiteCommand(conn);
             string query = "Select * from Competition where 1=1";
 
-            if (ID != null)
+            if (ID.HasValue)
             {
                 query += " and ID=@ID";
                 cmd.Parameters.AddWithValue("@ID", ID.ToString());
             }
-            if (name != "")
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 query += " and Nom=@name";
                 cmd.Parameters.AddWithValue("@name", name);
