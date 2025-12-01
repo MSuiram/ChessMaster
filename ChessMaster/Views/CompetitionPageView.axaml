@@ -9,15 +9,14 @@
     d:DesignWidth="800"
     x:DataType="vm:CompetitionPageViewModel"
     mc:Ignorable="d">
-    <Design.DataContext>
-        <vm:HomePageViewModel />
-    </Design.DataContext>
+    <UserControl.DataContext>
+        <vm:CompetitionPageViewModel />
+    </UserControl.DataContext>
 
     <Grid
         Margin="4"
         ColumnDefinitions="*,*,*"
-        RowDefinitions="Auto,Auto,Auto"
-        ShowGridLines="True">
+        RowDefinitions="Auto,Auto,Auto,Auto">
         <TextBlock Grid.Column="0">ID</TextBlock>
         <TextBlock Grid.Column="1">Nom</TextBlock>
         <TextBlock Grid.Column="2">joueur</TextBlock>
@@ -49,8 +48,26 @@
             Grid.Column="2"
             Width="200"
             HorizontalAlignment="Center"
-            Text="{Binding Player}"
+            Text="{Binding Winner}"
             Watermark="input" />
+        <ScrollViewer
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3">
+            <ItemsControl ItemsSource="{Binding CompetitionItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="vm:CompetitionItemViewModel">
+                        <Button HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Width="100" Content="{Binding ID}" />
+                                <Label Width="100" Content="{Binding Name}" />
+                                <Label Width="100" Content="{Binding Winner}" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 
 </UserControl>
