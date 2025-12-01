@@ -4,12 +4,14 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using ChessMaster.Models;
 using Avalonia.Controls;
 using System.Drawing;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using System.Threading.Tasks;
 
 namespace ChessMaster.ViewModels;
 
 public partial class PlayerItemViewModel : PlayerPageViewModel
 {
-
     public PlayerItemViewModel()
     {
     }
@@ -38,3 +40,4 @@ public class PlayerItem
     public string? FirstName { get; internal set; }
     public string? Id { get; internal set; }
 }
+

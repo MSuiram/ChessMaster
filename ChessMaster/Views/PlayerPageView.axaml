@@ -31,7 +31,7 @@
                 <ItemsControl ItemsSource="{Binding PlayerItems}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="vm:PlayerItemViewModel">
-                            <Button HorizontalAlignment="Stretch" Command="{Binding OpendWindowPlayerCommand}">
+                            <Button HorizontalAlignment="Stretch" Command="">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="100" Content="{Binding LastName}"></Label>
                                     <Label Width="100" Content="{Binding FirstName}"></Label>

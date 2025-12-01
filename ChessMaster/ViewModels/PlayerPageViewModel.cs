@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.Input;
 using ChessMaster.ViewModels;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
-using ChessMaster.Messages;
 
 
 namespace ChessMaster.ViewModels;
@@ -39,11 +38,4 @@ public partial class PlayerPageViewModel : ViewModelBase
         FirstName = null;
         Id = null;
     }
-
-    [RelayCommand]
-    private async Task OpendWindowPlayerAsync()
-    {
-        var playerwindow = await WeakReferenceMessenger.Default.Send(new WindowPlayerMessage());
-    }
-
 }

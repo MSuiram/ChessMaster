@@ -2,7 +2,10 @@ using System;
 
 namespace ChessMaster.ViewModels;
 
-public class AddPlayerViewModel
+public class AddPlayerViewModel : PlayerItemViewModel
 {
+    public AddPlayerViewModel()
+    {
 
+    }
 }
