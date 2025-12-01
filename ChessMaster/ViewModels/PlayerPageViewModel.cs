@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using ChessMaster.ViewModels;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Data;
 
 
 namespace ChessMaster.ViewModels;
@@ -22,11 +23,7 @@ public partial class PlayerPageViewModel : ViewModelBase
     private string? _firstName;
 
     [ObservableProperty]
-    private string? _id;
-
-    [ObservableProperty]
-    private string? _test;
-
+    private long? _id;
 
     [RelayCommand]
     private void GetName()
@@ -37,5 +34,17 @@ public partial class PlayerPageViewModel : ViewModelBase
         LastName = null;
         FirstName = null;
         Id = null;
+    }
+
+    [RelayCommand]
+    private void Search()
+    {
+        PlayerItems.Clear();
+        DataTable result = Connexion.FindPlayer(Id, LastName, FirstName);
+        foreach (DataRow row in result.Rows)
+        {
+            PlayerItems.Add(new PlayerItemViewModel() { LastName = row["Nom"].ToString(), Id = Convert.ToInt64(row["ID"]), FirstName = row["Prenom"].ToString() });
+
+        }
     }
 }
