@@ -123,6 +123,25 @@ public static class Connexion
         }
     }
 
+    public static void AddPlayer(long? ID, string? Nom, string? Prenom, int? Age, int? Elo, bool IsPlayer, bool IsAdmin)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Insert into Personne (ID, Nom, Prenom, Age, Elo, IsPlayer, IsAdmin) values (@ID, @Nom, @Prenom, @Age, @Elo, @IsPlayer, @IsAdmin)";
 
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@Nom", Nom);
+            cmd.Parameters.AddWithValue("@Prenom", Prenom);
+            cmd.Parameters.AddWithValue("@Age", Age);
+            cmd.Parameters.AddWithValue("@Elo", Elo);
+            cmd.Parameters.AddWithValue("@IsPlayer", IsPlayer);
+            cmd.Parameters.AddWithValue("@IsAdmin", IsAdmin);
 
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
 }

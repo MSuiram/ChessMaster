@@ -31,16 +31,12 @@ public partial class PlayerPageViewModel : ViewModelBase
     [ObservableProperty]
     private int? _elo;
 
-    [RelayCommand]
-    private void GetName()
-    {
-        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id });
-        Console.WriteLine("PalyerItems Counter : {0}", PlayerItems.Count);
+    [ObservableProperty]
+    private bool _searchMenu = true;
 
-        LastName = null;
-        FirstName = null;
-        Id = null;
-    }
+    [ObservableProperty]
+    private bool _editMenu = false;
+
 
     [RelayCommand]
     private void Search()
@@ -55,16 +51,48 @@ public partial class PlayerPageViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void RemoveItem(PlayerItemViewModel item)
+    private void Save()
     {
-        // Remove the given item from the list
-        PlayerItems.Remove(item);
-        Console.WriteLine(item.FirstName);
+        Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+        Console.WriteLine("Hello");
+    }
+
+    [RelayCommand]
+    private void GoToSearchMenu()
+    {
+        SearchMenu = true;
+        EditMenu = false;
+
+        LastName = null;
+        FirstName = null;
+        Id = null;
+        Age = null;
+        Elo = null;
+    }
+
+    [RelayCommand]
+    private void GoToEditMenu(PlayerItemViewModel item)
+    {
+        SearchMenu = false;
+        EditMenu = true;
 
         LastName = item.LastName;
         FirstName = item.FirstName;
         Id = item.Id;
         Age = item.Age;
         Elo = item.Elo;
+    }
+
+    [RelayCommand]
+    private void GoToAddMenu()
+    {
+        SearchMenu = false;
+        EditMenu = true;
+
+        LastName = null;
+        FirstName = null;
+        Id = null;
+        Age = null;
+        Elo = null;
     }
 }
