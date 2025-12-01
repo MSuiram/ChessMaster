@@ -86,5 +86,40 @@ public static class Connexion
         }
     }
 
+    public static DataTable FindPlayer(long? ID, string? Nom, string? Prenom)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Select * from Player where 1=1";
+
+            if (ID != null)
+            {
+                query += " and ID=@ID";
+                cmd.Parameters.AddWithValue("@ID", ID.ToString());
+            }
+            if (Nom != "")
+            {
+                query += " and Nom=@nom";
+                cmd.Parameters.AddWithValue("@nom", Nom);
+            }
+            if (Prenom != "")
+            {
+                query += " and Nom=@prenom";
+                cmd.Parameters.AddWithValue("@prenom", Prenom);
+            }
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+        }
+    }
+
 
 }
