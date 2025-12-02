@@ -37,6 +37,8 @@ public partial class PlayerPageViewModel : ViewModelBase
     [ObservableProperty]
     private bool _editMenu = false;
 
+    [ObservableProperty]
+    private bool _addPlayerState = false;
 
     [RelayCommand]
     private void Search()
@@ -53,8 +55,19 @@ public partial class PlayerPageViewModel : ViewModelBase
     [RelayCommand]
     private void Save()
     {
-        Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
-        Console.WriteLine("Hello");
+        if (AddPlayerState == true)
+        {
+            Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+            Console.WriteLine("Player {0} Added", Id);
+            VarToNull();
+        }
+        else
+        {
+            Connexion.EditPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+            Console.WriteLine("Player {0} Edited", Id);
+            VarToNull();
+
+        }
     }
 
     [RelayCommand]
@@ -63,11 +76,7 @@ public partial class PlayerPageViewModel : ViewModelBase
         SearchMenu = true;
         EditMenu = false;
 
-        LastName = null;
-        FirstName = null;
-        Id = null;
-        Age = null;
-        Elo = null;
+        VarToNull();
     }
 
     [RelayCommand]
@@ -75,6 +84,7 @@ public partial class PlayerPageViewModel : ViewModelBase
     {
         SearchMenu = false;
         EditMenu = true;
+        AddPlayerState = false;
 
         LastName = item.LastName;
         FirstName = item.FirstName;
@@ -88,7 +98,15 @@ public partial class PlayerPageViewModel : ViewModelBase
     {
         SearchMenu = false;
         EditMenu = true;
+        AddPlayerState = true;
 
+        VarToNull();
+
+        Id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+    }
+
+    private void VarToNull()
+    {
         LastName = null;
         FirstName = null;
         Id = null;

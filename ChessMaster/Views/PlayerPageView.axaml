@@ -18,7 +18,7 @@
                     <Grid ColumnDefinitions="300, 300" RowDefinitions="70,70,70,70" HorizontalAlignment="Center" ColumnSpacing="15">
                         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Stretch" Height="75">
                             <Label Margin="5" >ID:</Label>
-                            <TextBox Text="{Binding Id}" Watermark="Enter l'ID"/>
+                            <TextBox IsEnabled="{Binding !EditMenu}" Text="{Binding Id}" Watermark="Enter l'ID"/>
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" Height="75">
                             <Label Margin="5" >Nom:</Label>
@@ -47,7 +47,7 @@
                                 <DataTemplate DataType="vm:PlayerItemViewModel">
                                     <Button HorizontalAlignment="Stretch" Command="{Binding #Root.((vm:PlayerPageViewModel)DataContext).GoToEditMenuCommand}" CommandParameter="{Binding .}">
                                         <StackPanel Orientation="Horizontal">
-                                            <Label Width="100" Content="{Binding Id}"></Label>
+                                            <Label Width="200" Content="{Binding Id}"></Label>
                                             <Label Width="100" Content="{Binding LastName}"></Label>
                                             <Label Width="100" Content="{Binding FirstName}"></Label>
                                         </StackPanel>
