@@ -66,6 +66,7 @@ public partial class PlayerPageViewModel : ViewModelBase
             Connexion.EditPlayer(Id, LastName, FirstName, Age, Elo, true, false);
             Console.WriteLine("Player {0} Edited", Id);
             VarToNull();
+            Search();
 
         }
     }
