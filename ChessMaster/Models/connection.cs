@@ -165,4 +165,36 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
+
+    public static DataTable ClassementPlayer(int? AgeMin, int? AgeMax)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "SELECT * FROM Personne WHERE 1=1";
+
+            if (AgeMin.HasValue)
+            {
+                query += " and Age >= @AgeMin";
+                cmd.Parameters.AddWithValue("@AgeMin", AgeMin);
+            }
+            if (AgeMax.HasValue)
+            {
+                query += " and Age <= @AgeMax";
+                cmd.Parameters.AddWithValue("@AgeMax", AgeMax);
+            }
+
+            query += " ORDER BY Elo DESC";
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+        }
+    }
 }

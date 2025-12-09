@@ -10,6 +10,28 @@
     x:DataType="vm:ClassementPageViewModel"
     mc:Ignorable="d">
     <Design.DataContext>
-        <vm:HomePageViewModel />
+        <vm:ClassementPageViewModel></vm:ClassementPageViewModel>
     </Design.DataContext>
+    <Grid RowDefinitions="Auto, *">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button Command="{Binding JuniorClassementCommand}" HorizontalAlignment="Stretch" Height="35" Width="100" TextBlock.TextAlignment="Center">Junior</Button>
+            <Button Command="{Binding MajorClassementCommand}" HorizontalAlignment="Stretch" Height="35" Width="100" TextBlock.TextAlignment="Center">Major</Button>
+            <Button Command="{Binding SeniorClassementCommand}" HorizontalAlignment="Stretch" Height="35" Width="100" TextBlock.TextAlignment="Center">Senior</Button>
+        </StackPanel>
+            <ScrollViewer Grid.Row="1">
+                <ItemsControl ItemsSource="{Binding ClassementItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:ClassementItemViewModel">
+                            <StackPanel Orientation="Horizontal">
+                                    <Label Width="200" Content="{Binding Id}"></Label>
+                                    <Label Width="100" Content="{Binding LastName}"></Label>
+                                    <Label Width="100" Content="{Binding FirstName}"></Label>
+                                    <Label Width="100" Content="{Binding Elo}"></Label>
+                                    <Label Width="100" Content="{Binding Age}"></Label>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+    </Grid>
 </UserControl>
