@@ -165,21 +165,31 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
-<<<<<<< HEAD
     public static DataTable FindCompetitionPlayers(long competitionID)
-=======
-
-    public static DataTable ClassementPlayer(int? AgeMin, int? AgeMax)
->>>>>>> d504d907ce2336377157244f1dafa39e947624f7
     {
         using (var conn = connection())
         {
             var cmd = new SQLiteCommand(conn);
-<<<<<<< HEAD
             string query = "Select Player_1,Player_2 from Match where Competition_ID = @competitionID";
-
             cmd.Parameters.AddWithValue("@competitionID", competitionID);
-=======
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+
+        }
+    }
+
+    public static DataTable ClassementPlayer(int? AgeMin, int? AgeMax)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
             string query = "SELECT * FROM Personne WHERE 1=1";
 
             if (AgeMin.HasValue)
@@ -194,7 +204,7 @@ public static class Connexion
             }
 
             query += " ORDER BY Elo DESC";
->>>>>>> d504d907ce2336377157244f1dafa39e947624f7
+
 
             cmd.CommandText = query;
 
