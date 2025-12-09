@@ -25,16 +25,20 @@ public partial class PlayerPageViewModel : ViewModelBase
     [ObservableProperty]
     private long? _id;
 
-    [RelayCommand]
-    private void GetName()
-    {
-        PlayerItems.Add(new PlayerItemViewModel() { LastName = LastName, FirstName = FirstName, Id = Id });
-        Console.WriteLine("PalyerItems Counter : {0}", PlayerItems.Count);
+    [ObservableProperty]
+    private int? _age;
 
-        LastName = null;
-        FirstName = null;
-        Id = null;
-    }
+    [ObservableProperty]
+    private int? _elo;
+
+    [ObservableProperty]
+    private bool _searchMenu = true;
+
+    [ObservableProperty]
+    private bool _editMenu = false;
+
+    [ObservableProperty]
+    private bool _addPlayerState = false;
 
     [RelayCommand]
     private void Search()
@@ -43,8 +47,70 @@ public partial class PlayerPageViewModel : ViewModelBase
         DataTable result = Connexion.FindPlayer(Id, LastName, FirstName);
         foreach (DataRow row in result.Rows)
         {
-            PlayerItems.Add(new PlayerItemViewModel() { LastName = row["Nom"].ToString(), Id = Convert.ToInt64(row["ID"]), FirstName = row["Prenom"].ToString() });
+            PlayerItems.Add(new PlayerItemViewModel() { LastName = row["Nom"].ToString(), Id = Convert.ToInt64(row["ID"]), FirstName = row["Prenom"].ToString(), Elo = Convert.ToInt32(row["Elo"]), Age = Convert.ToInt32(row["Age"]) });
 
         }
+    }
+
+    [RelayCommand]
+    private void Save()
+    {
+        if (AddPlayerState == true)
+        {
+            Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+            Console.WriteLine("Player {0} Added", Id);
+            VarToNull();
+        }
+        else
+        {
+            Connexion.EditPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+            Console.WriteLine("Player {0} Edited", Id);
+            VarToNull();
+
+        }
+    }
+
+    [RelayCommand]
+    private void GoToSearchMenu()
+    {
+        SearchMenu = true;
+        EditMenu = false;
+
+        VarToNull();
+    }
+
+    [RelayCommand]
+    private void GoToEditMenu(PlayerItemViewModel item)
+    {
+        SearchMenu = false;
+        EditMenu = true;
+        AddPlayerState = false;
+
+        LastName = item.LastName;
+        FirstName = item.FirstName;
+        Id = item.Id;
+        Age = item.Age;
+        Elo = item.Elo;
+    }
+
+    [RelayCommand]
+    private void GoToAddMenu()
+    {
+        SearchMenu = false;
+        EditMenu = true;
+        AddPlayerState = true;
+
+        VarToNull();
+
+        Id = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+    }
+
+    private void VarToNull()
+    {
+        LastName = null;
+        FirstName = null;
+        Id = null;
+        Age = null;
+        Elo = null;
     }
 }

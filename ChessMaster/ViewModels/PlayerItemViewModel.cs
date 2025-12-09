@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using ChessMaster.Models;
 using Avalonia.Controls;
 using System.Drawing;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ChessMaster.ViewModels;
 
