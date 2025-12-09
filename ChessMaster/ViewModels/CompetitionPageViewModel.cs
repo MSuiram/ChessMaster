@@ -5,6 +5,7 @@ using ChessMaster.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+
 namespace ChessMaster.ViewModels;
 
 public partial class CompetitionPageViewModel : ViewModelBase
@@ -16,6 +17,8 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private string? _name;
     [ObservableProperty]
     private long? _winner;
+    [ObservableProperty]
+    private bool? _isVisible = true;
 
     [RelayCommand]
     private void Search()
@@ -26,11 +29,13 @@ public partial class CompetitionPageViewModel : ViewModelBase
         {
             Console.WriteLine(row["Nom"]);
             CompetitionItems.Add(new CompetitionItemViewModel() { Name = row["Nom"].ToString(), ID = Convert.ToInt64(row["ID"]), Winner = Convert.ToInt64(row["Winner_ID"]) });
-
         }
-
     }
-
+    [RelayCommand]
+    private void ModifyCompetition()
+    {
+        IsVisible = !IsVisible;
+    }
 
 
 

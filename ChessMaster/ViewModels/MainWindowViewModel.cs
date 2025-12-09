@@ -41,7 +41,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void GoToHome() => CurrentPage = _homePage;
+    public void GoToHome() => CurrentPage = _homePage;
 
     [RelayCommand]
     private void GoToPlayer() => CurrentPage = _playerPage;
@@ -53,4 +53,5 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [RelayCommand]
     private void GoToAddPlayer() => CurrentPage = _addPlayerPage;
+
 }
