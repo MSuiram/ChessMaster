@@ -14,14 +14,23 @@
     </UserControl.DataContext>
 
     <Grid
+        x:Name="Root"
         Margin="4"
         ColumnDefinitions="*,*,*"
-        RowDefinitions="Auto,Auto,Auto,*">
-        <TextBlock Grid.Column="0">ID</TextBlock>
-        <TextBlock Grid.Column="1">Nom</TextBlock>
-        <TextBlock Grid.Column="2">joueur</TextBlock>
+        RowDefinitions="Auto,Auto,Auto,Auto,*">
+        <Border
+            Grid.Row="0"
+            Grid.Column="0"
+            Padding="5">
+            <Button FontSize="10">
+                Modify competition
+            </Button>
+        </Border>
+        <TextBlock Grid.Row="1" Grid.Column="0">ID</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1">Nom</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2">joueur</TextBlock>
         <TextBox
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
             Width="200"
             Height="30"
@@ -29,7 +38,7 @@
             Text="{Binding ID}"
             Watermark="input" />
         <TextBox
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="1"
             Width="200"
             Height="30"
@@ -37,7 +46,7 @@
             Text="{Binding Name}"
             Watermark="input" />
         <Border
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="1"
             Padding="5">
             <Button
@@ -48,7 +57,7 @@
             </Button>
         </Border>
         <TextBox
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="2"
             Width="200"
             Height="30"
@@ -56,13 +65,14 @@
             Text="{Binding Winner}"
             Watermark="input" />
         <Border
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.ColumnSpan="3"
             Padding="20"
             Background="Brown"
-            CornerRadius="40">
+            CornerRadius="40"
+            IsVisible="{Binding IsCompetitionVisible}">
             <ScrollViewer
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="3">
                 <ItemsControl ItemsSource="{Binding CompetitionItems}">
@@ -70,12 +80,40 @@
                         <DataTemplate DataType="vm:CompetitionItemViewModel">
                             <Button
                                 HorizontalAlignment="Stretch"
-                                Command="{Binding ModifyCompetitionCommand}"
-                                IsVisible="{Binding IsVisible}">
+                                Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}"
+                                CommandParameter="{Binding}">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="100" Content="{Binding ID}" />
                                     <Label Width="100" Content="{Binding Name}" />
                                     <Label Width="100" Content="{Binding Winner}" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.ColumnSpan="3"
+            Padding="20"
+            Background="Brown"
+            CornerRadius="40"
+            IsVisible="{Binding IsPlayerVisible}">
+            <ScrollViewer
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3">
+                <ItemsControl ItemsSource="{Binding CompetitionPlayers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="vm:CompetitionPlayerItemViewModel">
+                            <Button HorizontalAlignment="Stretch" Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Width="100" Content="{Binding Player_iD}" />
+                                    <Label Width="100" Content="{Binding Player_nom}" />
+                                    <Label Width="100" Content="{Binding Player_prenom}" />
+                                    <Label Width="100" Content="{Binding Player_age}" />
+                                    <Label Width="100" Content="{Binding Player_elo}" />
                                 </StackPanel>
                             </Button>
                         </DataTemplate>

@@ -165,4 +165,24 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
+    public static DataTable FindCompetitionPlayers(long competitionID)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Select Player_1,Player_2 from Match where Competition_ID = @competitionID";
+
+            cmd.Parameters.AddWithValue("@competitionID", competitionID);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+        }
+    }
 }
