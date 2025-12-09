@@ -48,10 +48,4 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void GoToCompetition() => CurrentPage = _competitionPage;
 
-<<<<<<< HEAD
-    [RelayCommand]
-    private void GoToAddPlayer() => CurrentPage = _addPlayerPage;
-
-=======
->>>>>>> c92bd512a8499de6fa19c615a02ea6cc3fdeeba9
 }
