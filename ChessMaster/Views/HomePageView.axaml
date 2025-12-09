@@ -7,7 +7,20 @@
             x:DataType="vm:HomePageViewModel"
             x:Class="ChessMaster.Views.HomePageView">
     <Design.DataContext><vm:HomePageViewModel></vm:HomePageViewModel></Design.DataContext>
+    <Border Padding="20">
+        <Grid RowDefinitions="Auto, *" RowSpacing="20">
+            <Border Grid.Row="0" Padding="20" Background="Brown" CornerRadius="40" >
+                <StackPanel>
+                    
+                </StackPanel>    
+            </Border>
+            <Border Grid.Row="1" Padding="20" Background="Brown" CornerRadius="40">
+                <StackPanel>
+                    
+                </StackPanel>    
+            </Border>
+        </Grid>
+    </Border>
     
-    <Label Content="{Binding Test}"></Label>
 </UserControl>
             
