@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = new MainWindowViewModel(WeakReferenceMessenger.Default);
     }
 
     private void Image_PointerPressed(object? sender, PointerPressedEventArgs e)

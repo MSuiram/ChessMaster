@@ -1,9 +1,11 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using ChessMaster.Messages;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace ChessMaster.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationMessage>
 {
 
     [ObservableProperty]
@@ -21,13 +23,22 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool ClassementPageIsActive => CurrentPage == _classementPage;
     public bool CompetitionPageIsActive => CurrentPage == _competitionPage;
 
-    private readonly HomePageViewModel _homePage = new();
-    private readonly PlayerPageViewModel _playerPage = new();
-    private readonly ClassementPageViewModel _classementPage = new();
-    private readonly CompetitionPageViewModel _competitionPage = new();
+    private readonly HomePageViewModel _homePage;
+    private readonly PlayerPageViewModel _playerPage;
+    private readonly ClassementPageViewModel _classementPage;
+    private readonly CompetitionPageViewModel _competitionPage;
+    private readonly IMessenger _messenger;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IMessenger messenger)
     {
+        _messenger = messenger;
+        _messenger.Register<NavigationMessage>(this);
+
+        _homePage = new HomePageViewModel(_messenger);
+        _playerPage = new PlayerPageViewModel();
+        _classementPage = new ClassementPagePageViewModel();
+        _competitionPage = new CompetitionPageViewModel();
+
         CurrentPage = _homePage;
     }
 
@@ -35,6 +46,11 @@ public partial class MainWindowViewModel : ViewModelBase
     private void SideMenuResize()
     {
         SideMenuExpanded = !SideMenuExpanded;
+    }
+
+    public void Receive(NavigationMessage message)
+    {
+        CurrentPage = message.Value;
     }
 
     [RelayCommand]
@@ -48,4 +64,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void GoToCompetition() => CurrentPage = _competitionPage;
 
+}
+
+internal class ClassementPagePageViewModel : ClassementPageViewModel
+{
 }

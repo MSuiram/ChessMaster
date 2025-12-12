@@ -10,9 +10,11 @@
     <Border Padding="20">
         <Grid RowDefinitions="Auto, *" RowSpacing="20">
             <Border Grid.Row="0" Padding="20" Background="Brown" CornerRadius="40" >
-                <StackPanel>
-                    
-                </StackPanel>    
+                <Grid ColumnDefinitions="200,200,200" RowDefinitions="50" HorizontalAlignment="Center" ColumnSpacing="20">
+                    <Button Command="{Binding GoToPlayerCommand}" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.TextAlignment="Center" FontSize="30">Player</Button>
+                    <Button Command="{Binding GoToCompetitionCommand}" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.TextAlignment="Center" FontSize="30">Compétition</Button>
+                    <Button Command="{Binding GoToClassementCommand}" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TextBlock.TextAlignment="Center" FontSize="30">Classement</Button>
+                </Grid>  
             </Border>
             <Border Grid.Row="1" Padding="20" Background="Brown" CornerRadius="40">
                 <StackPanel>

@@ -6,6 +6,7 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using ChessMaster.ViewModels;
 using ChessMaster.Views;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace ChessMaster;
 
@@ -26,7 +27,7 @@ public partial class App : Application
             DisableAvaloniaDataAnnotationValidation();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(),
+                DataContext = new MainWindowViewModel(WeakReferenceMessenger.Default),
             };
         }
 
