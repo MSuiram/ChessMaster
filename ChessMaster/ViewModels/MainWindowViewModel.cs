@@ -1,4 +1,5 @@
-﻿using ChessMaster.Messages;
+﻿using System;
+using ChessMaster.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -40,6 +41,7 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationM
         _competitionPage = new CompetitionPageViewModel();
 
         CurrentPage = _homePage;
+        _homePage.Search();
     }
 
     [RelayCommand]
@@ -51,16 +53,29 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationM
     public void Receive(NavigationMessage message)
     {
         CurrentPage = message.Value;
+        Console.WriteLine(message.Value);
     }
 
     [RelayCommand]
-    public void GoToHome() => CurrentPage = _homePage;
+    public void GoToHome()
+    {
+        _messenger.Send(new NavigationMessage(_homePage));
+    }
     [RelayCommand]
-    private void GoToPlayer() => CurrentPage = _playerPage;
+    private void GoToPlayer()
+    {
+        _messenger.Send(new NavigationMessage(_playerPage));
+    }
     [RelayCommand]
-    private void GoToClassement() => CurrentPage = _classementPage;
+    private void GoToClassement()
+    {
+        _messenger.Send(new NavigationMessage(_classementPage));
+    }
     [RelayCommand]
-    private void GoToCompetition() => CurrentPage = _competitionPage;
+    private void GoToCompetition()
+    {
+        _messenger.Send(new NavigationMessage(_competitionPage));
+    }
 
 }
 

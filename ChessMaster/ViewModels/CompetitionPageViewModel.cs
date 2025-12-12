@@ -39,7 +39,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private void Search()
     {
         CompetitionItems.Clear();
-        DataTable result = Connexion.FindCompetition(ID, Name);
+        DataTable result = Connexion.FindCompetition(ID, Name, false);
         foreach (DataRow row in result.Rows)
         {
             CompetitionItems.Add(new CompetitionItemViewModel() { Name = row["Nom"].ToString(), ID = Convert.ToInt64(row["ID"]), Winner = Convert.ToInt64(row["Winner_ID"]) });
