@@ -36,7 +36,7 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationM
 
         _homePage = new HomePageViewModel(_messenger);
         _playerPage = new PlayerPageViewModel();
-        _classementPage = new ClassementPagePageViewModel();
+        _classementPage = new ClassementPageViewModel();
         _competitionPage = new CompetitionPageViewModel();
 
         CurrentPage = _homePage;
@@ -55,10 +55,8 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationM
 
     [RelayCommand]
     public void GoToHome() => CurrentPage = _homePage;
-
     [RelayCommand]
     private void GoToPlayer() => CurrentPage = _playerPage;
-
     [RelayCommand]
     private void GoToClassement() => CurrentPage = _classementPage;
     [RelayCommand]
