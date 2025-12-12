@@ -55,19 +55,22 @@ public partial class PlayerPageViewModel : ViewModelBase
     [RelayCommand]
     private void Save()
     {
-        if (AddPlayerState == true)
+        if (LastName != null && FirstName != null && Age != null && Elo != null)
         {
-            Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
-            Console.WriteLine("Player {0} Added", Id);
-            VarToNull();
-        }
-        else
-        {
-            Connexion.EditPlayer(Id, LastName, FirstName, Age, Elo, true, false);
-            Console.WriteLine("Player {0} Edited", Id);
-            VarToNull();
-            Search();
+            if (AddPlayerState == true)
+            {
+                Connexion.AddPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+                Console.WriteLine("Player {0} Added", Id);
+                VarToNull();
+            }
+            else
+            {
+                Connexion.EditPlayer(Id, LastName, FirstName, Age, Elo, true, false);
+                Console.WriteLine("Player {0} Edited", Id);
+                VarToNull();
+                Search();
 
+            }
         }
     }
 
