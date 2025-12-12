@@ -40,6 +40,7 @@ public partial class PlayerPageViewModel : ViewModelBase
     [ObservableProperty]
     private bool _addPlayerState = false;
 
+
     [RelayCommand]
     private void Search()
     {
@@ -79,6 +80,7 @@ public partial class PlayerPageViewModel : ViewModelBase
     {
         SearchMenu = true;
         EditMenu = false;
+        AddPlayerState = false;
 
         VarToNull();
     }
