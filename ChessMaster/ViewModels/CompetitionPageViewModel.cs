@@ -46,8 +46,15 @@ public partial class CompetitionPageViewModel : ViewModelBase
         }
     }
     [RelayCommand]
+    private void Return()
+    {
+        IsPlayerVisible = !IsPlayerVisible;
+        IsCompetitionVisible = !IsCompetitionVisible;
+    }
+    [RelayCommand]
     private void ShowCompetition(CompetitionItemViewModel item)
     {
+        Search();
         LoadCompetitionPlayers(item.ID);
         IsPlayerVisible = !IsPlayerVisible;
         IsCompetitionVisible = !IsCompetitionVisible;

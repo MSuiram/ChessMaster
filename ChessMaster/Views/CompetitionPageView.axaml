@@ -22,8 +22,11 @@
             Grid.Row="0"
             Grid.Column="0"
             Padding="5">
-            <Button FontSize="10">
-                Modify competition
+            <Button
+                Command="{Binding ReturnCommand}"
+                FontSize="10"
+                IsVisible="{Binding IsPlayerVisible}">
+                Return
             </Button>
         </Border>
         <TextBlock Grid.Row="1" Grid.Column="0">ID</TextBlock>
@@ -78,16 +81,17 @@
                 <ItemsControl ItemsSource="{Binding CompetitionItems}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate DataType="vm:CompetitionItemViewModel">
-                            <Button
-                                HorizontalAlignment="Stretch"
-                                Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}"
-                                CommandParameter="{Binding}">
+                            <Border>
                                 <StackPanel Orientation="Horizontal">
                                     <Label Width="100" Content="{Binding ID}" />
                                     <Label Width="100" Content="{Binding Name}" />
                                     <Label Width="100" Content="{Binding Winner}" />
+                                    <Button
+                                        Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="Players" />
                                 </StackPanel>
-                            </Button>
+                            </Border>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
