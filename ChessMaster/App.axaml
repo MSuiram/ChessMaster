@@ -12,6 +12,7 @@
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="avares://ChessMaster/Styles/AppDefaultStyles.axaml"></StyleInclude>
+        <StyleInclude Source="avares://ChessMaster/Styles/FormStyles.axaml"></StyleInclude>
     </Application.Styles>
 
     <Application.Resources>

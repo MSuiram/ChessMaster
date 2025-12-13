@@ -10,14 +10,27 @@
     <Border Padding="20">
         <Grid RowDefinitions="Auto, *" RowSpacing="20">
             <Border Grid.Row="0" Padding="20" Background="Brown" CornerRadius="40" >
-                <StackPanel>
-                    
-                </StackPanel>    
+                <Grid ColumnDefinitions="200,200,200" RowDefinitions="50" HorizontalAlignment="Center" ColumnSpacing="20">
+                    <Button Command="{Binding GoToPlayerCommand}" Grid.Column="0" Classes="Form">Player</Button>
+                    <Button Command="{Binding GoToCompetitionCommand}" Grid.Column="1" Classes="Form">Compétition</Button>
+                    <Button Command="{Binding GoToClassementCommand}" Grid.Column="2" Classes="Form">Classement</Button>
+                </Grid>  
             </Border>
             <Border Grid.Row="1" Padding="20" Background="Brown" CornerRadius="40">
-                <StackPanel>
-                    
-                </StackPanel>    
+                <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding HomeCompItems}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="vm:HomeCompetitionItemViewModel">
+                                    <Button HorizontalAlignment="Stretch" Command="" CommandParameter="">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Width="200" Content="{Binding Id}"></Label>
+                                            <Label Width="100" Content="{Binding Name}"></Label>
+                                        </StackPanel>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>    
             </Border>
         </Grid>
     </Border>

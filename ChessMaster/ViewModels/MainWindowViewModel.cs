@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using ChessMaster.Messages;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace ChessMaster.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationMessage>
 {
 
     [ObservableProperty]
@@ -21,14 +24,24 @@ public partial class MainWindowViewModel : ViewModelBase
     public bool ClassementPageIsActive => CurrentPage == _classementPage;
     public bool CompetitionPageIsActive => CurrentPage == _competitionPage;
 
-    private readonly HomePageViewModel _homePage = new();
-    private readonly PlayerPageViewModel _playerPage = new();
-    private readonly ClassementPageViewModel _classementPage = new();
-    private readonly CompetitionPageViewModel _competitionPage = new();
+    private readonly HomePageViewModel _homePage;
+    private readonly PlayerPageViewModel _playerPage;
+    private readonly ClassementPageViewModel _classementPage;
+    private readonly CompetitionPageViewModel _competitionPage;
+    private readonly IMessenger _messenger;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IMessenger messenger)
     {
+        _messenger = messenger;
+        _messenger.Register<NavigationMessage>(this);
+
+        _homePage = new HomePageViewModel(_messenger);
+        _playerPage = new PlayerPageViewModel();
+        _classementPage = new ClassementPageViewModel();
+        _competitionPage = new CompetitionPageViewModel();
+
         CurrentPage = _homePage;
+        _homePage.Search();
     }
 
     [RelayCommand]
@@ -37,15 +50,35 @@ public partial class MainWindowViewModel : ViewModelBase
         SideMenuExpanded = !SideMenuExpanded;
     }
 
-    [RelayCommand]
-    public void GoToHome() => CurrentPage = _homePage;
+    public void Receive(NavigationMessage message)
+    {
+        CurrentPage = message.Value;
+        Console.WriteLine(message.Value);
+    }
 
     [RelayCommand]
-    private void GoToPlayer() => CurrentPage = _playerPage;
-
+    public void GoToHome()
+    {
+        _messenger.Send(new NavigationMessage(_homePage));
+    }
     [RelayCommand]
-    private void GoToClassement() => CurrentPage = _classementPage;
+    private void GoToPlayer()
+    {
+        _messenger.Send(new NavigationMessage(_playerPage));
+    }
     [RelayCommand]
-    private void GoToCompetition() => CurrentPage = _competitionPage;
+    private void GoToClassement()
+    {
+        _messenger.Send(new NavigationMessage(_classementPage));
+    }
+    [RelayCommand]
+    private void GoToCompetition()
+    {
+        _messenger.Send(new NavigationMessage(_competitionPage));
+    }
 
+}
+
+internal class ClassementPagePageViewModel : ClassementPageViewModel
+{
 }

@@ -12,7 +12,7 @@ public class ViewLocator : IDataTemplate
     {
         if (param is null)
             return null;
-        
+
         var viewname = param.GetType().FullName!.Replace("ViewModel", "View", StringComparison.InvariantCulture);
         var type = Type.GetType(viewname);
 

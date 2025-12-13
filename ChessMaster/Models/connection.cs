@@ -58,7 +58,7 @@ public static class Connexion
     }
 
 
-    public static DataTable FindCompetition(long? ID, string? name)
+    public static DataTable FindCompetition(long? ID, string? name, bool Winner_ID)
     {
         using (var conn = connection())
         {
@@ -74,6 +74,10 @@ public static class Connexion
             {
                 query += " and Nom=@name";
                 cmd.Parameters.AddWithValue("@name", name);
+            }
+            if (Winner_ID == true)
+            {
+                query += " and Winner_ID IS NULL";
             }
 
             cmd.CommandText = query;
