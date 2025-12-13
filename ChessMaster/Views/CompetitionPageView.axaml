@@ -23,9 +23,9 @@
             Grid.Column="0"
             Padding="5">
             <Button
-                Command="{Binding ReturnCommand}"
+                Command="{Binding ShowCompetitionsCommand}"
                 FontSize="10"
-                IsVisible="{Binding IsPlayerVisible}">
+                IsVisible="{Binding !IsCompetitionVisible}">
                 Return
             </Button>
         </Border>
@@ -78,23 +78,120 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="3">
-                <ItemsControl ItemsSource="{Binding CompetitionItems}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="vm:CompetitionItemViewModel">
-                            <Border>
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Width="100" Content="{Binding ID}" />
-                                    <Label Width="100" Content="{Binding Name}" />
-                                    <Label Width="100" Content="{Binding Winner}" />
-                                    <Button
-                                        Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}"
-                                        CommandParameter="{Binding}"
-                                        Content="Players" />
-                                </StackPanel>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <StackPanel>
+                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto">
+                        <Label
+                            Grid.Column="0"
+                            Content="ID"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="1"
+                            Content="Name"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="2"
+                            Content="Winner"
+                            FontWeight="Bold" />
+                        <Label Grid.Column="3" Width="60" />
+                        <Label Grid.Column="4" Width="60" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding CompetitionItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vm:CompetitionItemViewModel">
+                                <Border>
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto">
+                                        <Label Grid.Column="0" Content="{Binding ID}" />
+                                        <Label Grid.Column="1" Content="{Binding Name}" />
+                                        <Label Grid.Column="2" Content="{Binding Winner}" />
+                                        <Button
+                                            Grid.Column="3"
+                                            Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowPlayersCommand}"
+                                            CommandParameter="{Binding}"
+                                            Content="Players" />
+                                        <Button
+                                            Grid.Column="4"
+                                            Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowMatchesCommand}"
+                                            CommandParameter="{Binding}"
+                                            Content="Matches" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+        <Border
+            Grid.Row="4"
+            Grid.ColumnSpan="3"
+            Padding="20"
+            Background="Brown"
+            CornerRadius="40"
+            IsVisible="{Binding IsMatchVisible}">
+            <ScrollViewer
+                Grid.Row="4"
+                Grid.Column="0"
+                Grid.ColumnSpan="3">
+                <StackPanel>
+                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                        <!--  Header  -->
+                        <Label
+                            Grid.Column="0"
+                            Width="100"
+                            Content="ID"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="1"
+                            Width="100"
+                            Content="Player 1"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="2"
+                            Width="100"
+                            Content="Player 2"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="3"
+                            Width="100"
+                            Content="Competition ID"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="4"
+                            Width="100"
+                            Content="Winner ID"
+                            FontWeight="Bold" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding CompetitionMatch}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vm:CompetitionMatchItemViewModel">
+                                <Border HorizontalAlignment="Stretch">
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                                        <Label
+                                            Grid.Column="0"
+                                            Width="100"
+                                            Content="{Binding Match_ID}" />
+                                        <Label
+                                            Grid.Column="1"
+                                            Width="100"
+                                            Content="{Binding Match_Player_1}" />
+                                        <Label
+                                            Grid.Column="2"
+                                            Width="100"
+                                            Content="{Binding Match_Player_2}" />
+                                        <Label
+                                            Grid.Column="3"
+                                            Width="100"
+                                            Content="{Binding Match_Competition_ID}" />
+                                        <Label
+                                            Grid.Column="4"
+                                            Width="100"
+                                            Content="{Binding Match_Winner_ID}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </ScrollViewer>
         </Border>
         <Border
@@ -108,21 +205,65 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Grid.ColumnSpan="3">
-                <ItemsControl ItemsSource="{Binding CompetitionPlayers}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate DataType="vm:CompetitionPlayerItemViewModel">
-                            <Button HorizontalAlignment="Stretch" Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowCompetitionCommand}">
-                                <StackPanel Orientation="Horizontal">
-                                    <Label Width="100" Content="{Binding Player_iD}" />
-                                    <Label Width="100" Content="{Binding Player_nom}" />
-                                    <Label Width="100" Content="{Binding Player_prenom}" />
-                                    <Label Width="100" Content="{Binding Player_age}" />
-                                    <Label Width="100" Content="{Binding Player_elo}" />
-                                </StackPanel>
-                            </Button>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <StackPanel>
+                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                        <Label
+                            Grid.Column="0"
+                            Width="100"
+                            Content="ID"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="1"
+                            Width="100"
+                            Content="Nom"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="2"
+                            Width="100"
+                            Content="Prenom"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="3"
+                            Width="100"
+                            Content="Age"
+                            FontWeight="Bold" />
+                        <Label
+                            Grid.Column="4"
+                            Width="100"
+                            Content="Elo"
+                            FontWeight="Bold" />
+                    </Grid>
+                    <ItemsControl ItemsSource="{Binding CompetitionPlayers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="vm:CompetitionPlayerItemViewModel">
+                                <Border HorizontalAlignment="Stretch">
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                                        <Label
+                                            Grid.Column="0"
+                                            Width="100"
+                                            Content="{Binding Player_iD}" />
+                                        <Label
+                                            Grid.Column="1"
+                                            Width="100"
+                                            Content="{Binding Player_nom}" />
+                                        <Label
+                                            Grid.Column="2"
+                                            Width="100"
+                                            Content="{Binding Player_prenom}" />
+                                        <Label
+                                            Grid.Column="3"
+                                            Width="100"
+                                            Content="{Binding Player_age}" />
+                                        <Label
+                                            Grid.Column="4"
+                                            Width="100"
+                                            Content="{Binding Player_elo}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
             </ScrollViewer>
         </Border>
     </Grid>

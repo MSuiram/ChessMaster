@@ -188,6 +188,25 @@ public static class Connexion
 
         }
     }
+    public static DataTable FindCompetitionMatches(long competitionID)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Select * from Match where Competition_ID = @competitionID";
+            cmd.Parameters.AddWithValue("@competitionID", competitionID);
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+
+        }
+    }
 
     public static DataTable ClassementPlayer(int? AgeMin, int? AgeMax)
     {

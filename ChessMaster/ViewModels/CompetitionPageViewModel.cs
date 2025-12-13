@@ -13,6 +13,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
 {
     public ObservableCollection<CompetitionItemViewModel> CompetitionItems { get; } = new ObservableCollection<CompetitionItemViewModel>();
     public ObservableCollection<CompetitionPlayerItemViewModel> CompetitionPlayers { get; } = new ObservableCollection<CompetitionPlayerItemViewModel>();
+    public ObservableCollection<CompetitionMatchItemViewModel> CompetitionMatch { get; } = new ObservableCollection<CompetitionMatchItemViewModel>();
     [ObservableProperty]
     private long? _player_iD;
     [ObservableProperty]
@@ -23,7 +24,18 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private int? _player_age;
     [ObservableProperty]
     private int? _player_elo;
-
+    [ObservableProperty]
+    private long? _match_ID;
+    [ObservableProperty]
+    private long? _match_Player_1;
+    [ObservableProperty]
+    private long? _match_Player_2;
+    [ObservableProperty]
+    private long? _match_Competition_ID;
+    [ObservableProperty]
+    private string? _match_Coups;
+    [ObservableProperty]
+    private long? _match_Winner_ID;
     [ObservableProperty]
     private long? _iD;
     [ObservableProperty]
@@ -33,31 +45,43 @@ public partial class CompetitionPageViewModel : ViewModelBase
     [ObservableProperty]
     private bool? _isCompetitionVisible = true;
     [ObservableProperty]
-    private bool _isPlayerVisible = false;
-
+    private bool? _isMatchVisible = false;
+    [ObservableProperty]
+    private bool? _isPlayerVisible = false;
     [RelayCommand]
     private void Search()
     {
         CompetitionItems.Clear();
         DataTable result = Connexion.FindCompetition(ID, Name, false);
-        foreach (DataRow row in result.Rows)
-        {
-            CompetitionItems.Add(new CompetitionItemViewModel() { Name = row["Nom"].ToString(), ID = Convert.ToInt64(row["ID"]), Winner = Convert.ToInt64(row["Winner_ID"]) });
-        }
+            foreach (DataRow row in result.Rows)
+            {
+                var winner = row["Winner_ID"] == DBNull.Value ? (long?)null : Convert.ToInt64(row["Winner_ID"]);
+                CompetitionItems.Add(new CompetitionItemViewModel() { Name = row["Nom"].ToString(), ID = Convert.ToInt64(row["ID"]), Winner = winner });
+            }
     }
     [RelayCommand]
-    private void Return()
+    private void ShowCompetitions()
     {
-        IsPlayerVisible = !IsPlayerVisible;
-        IsCompetitionVisible = !IsCompetitionVisible;
+        IsPlayerVisible = false;
+        IsMatchVisible = false;
+        IsCompetitionVisible = true;
     }
     [RelayCommand]
-    private void ShowCompetition(CompetitionItemViewModel item)
+    private void ShowPlayers(CompetitionItemViewModel item)
     {
         Search();
         LoadCompetitionPlayers(item.ID);
-        IsPlayerVisible = !IsPlayerVisible;
-        IsCompetitionVisible = !IsCompetitionVisible;
+        IsPlayerVisible = true;
+        IsMatchVisible = false;
+        IsCompetitionVisible = false;
+    }
+    [RelayCommand]
+    private void ShowMatches(CompetitionItemViewModel item)
+    {
+        FindCompetitionMatch(item.ID);
+        IsPlayerVisible = false;
+        IsMatchVisible = true;
+        IsCompetitionVisible = false;
     }
     private void LoadCompetitionPlayers(long? ID)
     {
@@ -67,20 +91,31 @@ public partial class CompetitionPageViewModel : ViewModelBase
             DataTable result = Connexion.FindCompetitionPlayers((long)ID);
             foreach (DataRow row in result.Rows)
             {
-                AddPlayerToCompetition(Convert.ToInt64(row["Player_1"]));
-                AddPlayerToCompetition(Convert.ToInt64(row["Player_2"]));
+                FindCompetitionPLayer(Convert.ToInt64(row["Player_1"]));
+                FindCompetitionPLayer(Convert.ToInt64(row["Player_2"]));
             }
 
         }
     }
-    private void AddPlayerToCompetition(long ID)
+    private void FindCompetitionPLayer(long ID)
     {
         DataTable result = Connexion.FindPlayer(ID, null, null);
         foreach (DataRow row in result.Rows)
         {
-            Console.WriteLine("Adding player to competition viewmodel");
-            Console.WriteLine(row["Nom"].ToString());
             CompetitionPlayers.Add(new CompetitionPlayerItemViewModel() { Player_iD = Convert.ToInt64(row["ID"]), Player_nom = row["Nom"].ToString(), Player_prenom = row["Prenom"].ToString(), Player_age = Convert.ToInt32(row["Age"]), Player_elo = Convert.ToInt32(row["Elo"]) });
+        }
+    }
+    private void FindCompetitionMatch(long? ID)
+    {
+        if (ID != null){
+        CompetitionMatch.Clear();
+        DataTable result = Connexion.FindCompetitionMatches((long)ID);
+        foreach (DataRow row in result.Rows)
+        {
+            var winner = row["Winner_ID"] == DBNull.Value ? (long?)null : Convert.ToInt64(row["Winner_ID"]);
+            var coups = row["Coups"] == DBNull.Value ? null : row["Coups"].ToString();
+            CompetitionMatch.Add(new CompetitionMatchItemViewModel() { Match_ID = Convert.ToInt64(row["ID"]), Match_Player_1 = Convert.ToInt64(row["Player_1"]), Match_Player_2 = Convert.ToInt64(row["Player_2"]), Match_Competition_ID = Convert.ToInt64(row["Competition_ID"]), Match_Coups = coups, Match_Winner_ID = winner });
+        }
         }
     }
 }
