@@ -258,4 +258,31 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
+
+    public static void EditMatch(long? ID, string? Coups, long? Winner_ID)
+    {
+        Console.WriteLine("hello");
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Update Match set ";
+
+            query += "Coups = @Coups ";
+            cmd.Parameters.AddWithValue("@Coups", Coups);
+
+            if (Winner_ID.HasValue)
+            {
+                query += ",Winner_ID = @Winner_ID ";
+                cmd.Parameters.AddWithValue("@Winner_ID", Winner_ID);
+            }
+
+            query += "where ID = @ID";
+            cmd.Parameters.AddWithValue("@ID", ID);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
 }

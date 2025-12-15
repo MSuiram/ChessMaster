@@ -196,30 +196,34 @@
                                         <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
                                             <Label
                                                 Grid.Column="0"
-                                                Width="100"
+                                                Width="120"
                                                 Content="{Binding Match_ID}" />
                                             <Label
                                                 Grid.Column="1"
-                                                Width="100"
+                                                Width="120"
                                                 Content="{Binding Match_Player_1}" />
                                             <Label
                                                 Grid.Column="2"
-                                                Width="100"
+                                                Width="120"
                                                 Content="{Binding Match_Player_2}" />
                                             <Label
                                                 Grid.Column="3"
-                                                Width="100"
+                                                Width="120"
                                                 Content="{Binding Match_Competition_ID}" />
                                             <Label
                                                 Grid.Column="4"
-                                                Width="100"
+                                                Width="120"
                                                 Content="{Binding Match_Winner_ID}" />
                                         </Grid>
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" IsVisible="{Binding Match_No_Winner}">
                                             <Button Command="{Binding AddCoupsPlayer1Command}">P1</Button>
                                             <Button Command="{Binding AddCoupsPlayer2Command}">P2</Button>
                                             <TextBox Text="{Binding Depard}"></TextBox>
                                             <TextBox Text="{Binding Arrive}"></TextBox>
+                                            <Label>Winner :</Label>
+                                            <RadioButton Content="{Binding Match_Player_1}" IsChecked="{Binding Winner_P1}"></RadioButton>
+                                            <RadioButton Content="{Binding Match_Player_2}" IsChecked="{Binding Winner_P2}"></RadioButton>
+                                            <Button Command="{Binding SaveMatchCommand}">Save</Button>
                                         </StackPanel>
                                         <Label Content="{Binding Match_Coups}"></Label>
                                     </StackPanel>
