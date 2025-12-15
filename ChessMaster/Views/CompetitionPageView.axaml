@@ -192,28 +192,37 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:CompetitionMatchItemViewModel">
                                 <Border HorizontalAlignment="Stretch">
-                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
-                                        <Label
-                                            Grid.Column="0"
-                                            Width="100"
-                                            Content="{Binding Match_ID}" />
-                                        <Label
-                                            Grid.Column="1"
-                                            Width="100"
-                                            Content="{Binding Match_Player_1}" />
-                                        <Label
-                                            Grid.Column="2"
-                                            Width="100"
-                                            Content="{Binding Match_Player_2}" />
-                                        <Label
-                                            Grid.Column="3"
-                                            Width="100"
-                                            Content="{Binding Match_Competition_ID}" />
-                                        <Label
-                                            Grid.Column="4"
-                                            Width="100"
-                                            Content="{Binding Match_Winner_ID}" />
-                                    </Grid>
+                                    <StackPanel>
+                                        <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                                            <Label
+                                                Grid.Column="0"
+                                                Width="100"
+                                                Content="{Binding Match_ID}" />
+                                            <Label
+                                                Grid.Column="1"
+                                                Width="100"
+                                                Content="{Binding Match_Player_1}" />
+                                            <Label
+                                                Grid.Column="2"
+                                                Width="100"
+                                                Content="{Binding Match_Player_2}" />
+                                            <Label
+                                                Grid.Column="3"
+                                                Width="100"
+                                                Content="{Binding Match_Competition_ID}" />
+                                            <Label
+                                                Grid.Column="4"
+                                                Width="100"
+                                                Content="{Binding Match_Winner_ID}" />
+                                        </Grid>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Command="{Binding AddCoupsPlayer1Command}">P1</Button>
+                                            <Button Command="{Binding AddCoupsPlayer2Command}">P2</Button>
+                                            <TextBox Text="{Binding Depard}"></TextBox>
+                                            <TextBox Text="{Binding Arrive}"></TextBox>
+                                        </StackPanel>
+                                        <Label Content="{Binding Match_Coups}"></Label>
+                                    </StackPanel>
                                 </Border>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
