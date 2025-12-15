@@ -18,10 +18,12 @@
         Margin="4"
         ColumnDefinitions="*,*,*"
         RowDefinitions="Auto,Auto,Auto,Auto,*">
+        <!--  Search Form  -->
         <Border
             Grid.Row="0"
             Grid.Column="0"
-            Padding="5">
+            Padding="5"
+            IsVisible="{Binding !IsCompetitionVisible}">
             <Button
                 Command="{Binding ShowCompetitionsCommand}"
                 FontSize="10"
@@ -29,15 +31,31 @@
                 Return
             </Button>
         </Border>
-        <TextBlock Grid.Row="1" Grid.Column="0">ID</TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1">Nom</TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="2">joueur</TextBlock>
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            IsVisible="{Binding IsCompetitionVisible}">
+            ID
+        </TextBlock>
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            IsVisible="{Binding IsCompetitionVisible}">
+            Nom
+        </TextBlock>
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            IsVisible="{Binding IsCompetitionVisible}">
+            joueur
+        </TextBlock>
         <TextBox
             Grid.Row="2"
             Grid.Column="0"
             Width="200"
             Height="30"
             HorizontalAlignment="Center"
+            IsVisible="{Binding IsCompetitionVisible}"
             Text="{Binding ID}"
             Watermark="input" />
         <TextBox
@@ -46,16 +64,19 @@
             Width="200"
             Height="30"
             HorizontalAlignment="Center"
+            IsVisible="{Binding IsCompetitionVisible}"
             Text="{Binding Name}"
             Watermark="input" />
         <Border
             Grid.Row="3"
             Grid.Column="1"
-            Padding="5">
+            Padding="5"
+            IsVisible="{Binding IsCompetitionVisible}">
             <Button
                 HorizontalAlignment="Stretch"
                 Command="{Binding SearchCommand}"
-                FontSize="10">
+                FontSize="10"
+                IsVisible="{Binding IsCompetitionVisible}">
                 Search
             </Button>
         </Border>
@@ -65,8 +86,9 @@
             Width="200"
             Height="30"
             HorizontalAlignment="Center"
-            Text="{Binding Winner}"
-            Watermark="input" />
+            IsVisible="{Binding IsCompetitionVisible}"
+            Text="{Binding Winner}" />
+        <!--  Competition List  -->
         <Border
             Grid.Row="4"
             Grid.ColumnSpan="3"
@@ -99,7 +121,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:CompetitionItemViewModel">
                                 <Border>
-                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto">
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto,Auto">
                                         <Label Grid.Column="0" Content="{Binding ID}" />
                                         <Label Grid.Column="1" Content="{Binding Name}" />
                                         <Label Grid.Column="2" Content="{Binding Winner}" />
@@ -113,6 +135,11 @@
                                             Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowMatchesCommand}"
                                             CommandParameter="{Binding}"
                                             Content="Matches" />
+                                        <Button
+                                            Grid.Column="5"
+                                            Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).ShowNewMatchCommand}"
+                                            CommandParameter="{Binding}"
+                                            Content="+ Match" />
                                     </Grid>
                                 </Border>
                             </DataTemplate>
@@ -121,6 +148,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
+        <!--  Match List  -->
         <Border
             Grid.Row="4"
             Grid.ColumnSpan="3"
@@ -134,7 +162,6 @@
                 Grid.ColumnSpan="3">
                 <StackPanel>
                     <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
-                        <!--  Header  -->
                         <Label
                             Grid.Column="0"
                             Width="100"
@@ -194,6 +221,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Border>
+        <!--  Players List  -->
         <Border
             Grid.Row="4"
             Grid.ColumnSpan="3"
@@ -265,6 +293,55 @@
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
+        </Border>
+        <!--  Match Adder  -->
+        <Border
+            Grid.Row="4"
+            Grid.ColumnSpan="3"
+            Padding="20"
+            Background="Brown"
+            CornerRadius="40"
+            IsVisible="{Binding IsNewMatchVisible}">
+            <Grid
+                HorizontalAlignment="Stretch"
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto,Auto">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Content="Player 1 ID:" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Content="Player 2 ID:" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Width="150"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Text="{Binding NewMatch_Player1}"
+                    Watermark="Player 1 ID" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="150"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Text="{Binding NewMatch_Player2}"
+                    Watermark="Player 2 ID" />
+                <Button
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="10"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding NewMatchCommand}"
+                    Content="Add Match" />
+
+            </Grid>
         </Border>
     </Grid>
 

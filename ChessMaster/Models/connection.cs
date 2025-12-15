@@ -240,4 +240,22 @@ public static class Connexion
             return result;
         }
     }
+    public static void AddMatch(long? ID, long? Player_1, long? Player_2, long? Competition_ID)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Insert into Match (ID, Player_1, Player_2, Competition_ID) values (@ID, @Player_1, @Player_2, @Competition_ID)";
+
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@Player_1", Player_1);
+            cmd.Parameters.AddWithValue("@Player_2", Player_2);
+            cmd.Parameters.AddWithValue("@Competition_ID", Competition_ID);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
 }
