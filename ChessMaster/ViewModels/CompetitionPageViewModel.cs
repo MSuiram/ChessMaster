@@ -65,7 +65,11 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private long _newMatch_ID;
     [ObservableProperty]
     private long? _newMatch_CompetitionID;
-
+    [ObservableProperty]
+    private string? _newCompetition_Name;
+    [ObservableProperty]
+    private string? _newCompetition_Date; 
+    private long NewCompetition_ID;
 
     [RelayCommand]
     private void NewMatch(CompetitionItemViewModel item)
