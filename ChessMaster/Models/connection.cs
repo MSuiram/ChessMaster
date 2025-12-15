@@ -127,6 +127,48 @@ public static class Connexion
         }
     }
 
+    public static DataTable FindEloPlayer(long? ID)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Select Elo from Personne where 1=1";
+
+            if (ID.HasValue)
+            {
+                query += " and ID=@ID";
+                cmd.Parameters.AddWithValue("@ID", ID.ToString());
+            }
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            SQLiteDataReader reader;
+            reader = cmd.ExecuteReader();
+
+            var result = new DataTable();
+            result.Load(reader);
+            return result;
+        }
+    }
+
+     public static void EditEloPlayer(long? ID, int? Elo)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Update Personne set Elo = @Elo where ID = @ID";
+
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@Elo", Elo);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
+
     public static void AddPlayer(long? ID, string? Nom, string? Prenom, int? Age, int? Elo, bool IsPlayer, bool IsAdmin)
     {
         using (var conn = connection())
@@ -261,7 +303,6 @@ public static class Connexion
 
     public static void EditMatch(long? ID, string? Coups, long? Winner_ID)
     {
-        Console.WriteLine("hello");
         using (var conn = connection())
         {
             var cmd = new SQLiteCommand(conn);
