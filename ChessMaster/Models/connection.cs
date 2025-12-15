@@ -258,6 +258,7 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
+<<<<<<< HEAD
     public static void AddCompetition(long? ID, string? Nom, string? Date)
     {
         using (var conn = connection())
@@ -268,6 +269,28 @@ public static class Connexion
             cmd.Parameters.AddWithValue("@ID", ID);
             cmd.Parameters.AddWithValue("@Nom", Nom);
             cmd.Parameters.AddWithValue("@Date", Date);
+=======
+
+    public static void EditMatch(long? ID, string? Coups, long? Winner_ID)
+    {
+        Console.WriteLine("hello");
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Update Match set ";
+
+            query += "Coups = @Coups ";
+            cmd.Parameters.AddWithValue("@Coups", Coups);
+
+            if (Winner_ID.HasValue)
+            {
+                query += ",Winner_ID = @Winner_ID ";
+                cmd.Parameters.AddWithValue("@Winner_ID", Winner_ID);
+            }
+
+            query += "where ID = @ID";
+            cmd.Parameters.AddWithValue("@ID", ID);
+>>>>>>> 1a71e57757b49c24aa1690d2d0125a08f99d0d03
 
             cmd.CommandText = query;
 

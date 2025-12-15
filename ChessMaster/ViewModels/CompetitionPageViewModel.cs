@@ -4,6 +4,7 @@ using System.Data;
 using System.Runtime.Versioning;
 using System.Threading;
 using Avalonia.Controls;
+using Avalonia.Metadata;
 using ChessMaster.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -39,6 +40,8 @@ public partial class CompetitionPageViewModel : ViewModelBase
     [ObservableProperty]
     private long? _match_Winner_ID;
     [ObservableProperty]
+    private bool? _match_No_Winner;
+    [ObservableProperty]
     private long? _iD;
     [ObservableProperty]
     private string? _name;
@@ -62,11 +65,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private long _newMatch_ID;
     [ObservableProperty]
     private long? _newMatch_CompetitionID;
-    [ObservableProperty]
-    private string? _newCompetition_Name;
-    [ObservableProperty]
-    private string? _newCompetition_Date; 
-    private long NewCompetition_ID;
+
 
     [RelayCommand]
     private void NewMatch(CompetitionItemViewModel item)
@@ -175,7 +174,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
             {
                 var winner = row["Winner_ID"] == DBNull.Value ? (long?)null : Convert.ToInt64(row["Winner_ID"]);
                 var coups = row["Coups"] == DBNull.Value ? null : row["Coups"].ToString();
-                CompetitionMatch.Add(new CompetitionMatchItemViewModel() { Match_ID = Convert.ToInt64(row["ID"]), Match_Player_1 = Convert.ToInt64(row["Player_1"]), Match_Player_2 = Convert.ToInt64(row["Player_2"]), Match_Competition_ID = Convert.ToInt64(row["Competition_ID"]), Match_Coups = coups, Match_Winner_ID = winner });
+                CompetitionMatch.Add(new CompetitionMatchItemViewModel() { Match_ID = Convert.ToInt64(row["ID"]), Match_Player_1 = Convert.ToInt64(row["Player_1"]), Match_Player_2 = Convert.ToInt64(row["Player_2"]), Match_Competition_ID = Convert.ToInt64(row["Competition_ID"]), Match_Coups = coups, Match_Winner_ID = winner , Match_No_Winner = !winner.HasValue});
             }
         }
     }

@@ -3,11 +3,23 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using ChessMaster.Models;
 using Avalonia.Controls;
 using System.Drawing;
+using CommunityToolkit.Mvvm.Input;
+using System.Text.RegularExpressions;
+using System;
 
 namespace ChessMaster.ViewModels;
 
 public partial class CompetitionMatchItemViewModel : CompetitionPageViewModel
 {
+    [ObservableProperty]
+    private string? _depard;
+    [ObservableProperty]
+    private string? _arrive;
+    [ObservableProperty]
+    private bool? _winner_P1 = false;
+    [ObservableProperty]
+    private bool? _winner_P2 = false;
+
     public CompetitionMatchItemViewModel() { }
     public CompetitionMatchItemViewModel(CompetitionMatchItem item)
     {
@@ -17,5 +29,58 @@ public partial class CompetitionMatchItemViewModel : CompetitionPageViewModel
         Match_Competition_ID = item.Competition_ID;
         Match_Coups = item.Coups;
         Match_Winner_ID = item.Winner_ID;
+        Match_No_Winner = item.No_Winner;
+    }
+
+    [RelayCommand]
+    public void AddCoupsPlayer1()
+    {
+        AddCoups(Match_Player_1);
+    }
+
+    [RelayCommand]
+    public void AddCoupsPlayer2()
+    {
+        AddCoups(Match_Player_2);
+    }
+
+    [RelayCommand]
+    public void SaveMatch()
+    {
+        if (Winner_P1 == true)
+        {
+            Match_Winner_ID = Match_Player_1;
+            Connexion.EditMatch(Match_ID, Match_Coups, Match_Player_1);
+            Match_No_Winner = false;
+        }
+        else if (Winner_P2 == true)
+        {
+            Match_Winner_ID = Match_Player_2;
+            Connexion.EditMatch(Match_ID, Match_Coups, Match_Player_2);
+            Match_No_Winner = false;
+        }
+        else
+        {
+            Connexion.EditMatch(Match_ID, Match_Coups, null);
+        }
+    }
+
+    public void AddCoups(long? MatchPlayer)
+    {
+        if (Depard != null && Arrive != null)
+        {
+            if (Match_Coups != null)
+            {
+                Match_Coups = Match_Coups + '\n' + MatchPlayer.ToString() + " joue " + Depard + " -> " + Arrive;
+                Console.WriteLine(Match_Coups);
+            }
+            else
+            {
+                Match_Coups = MatchPlayer.ToString() + " joue " + Depard + " -> " + Arrive;
+                Console.WriteLine(Match_Coups);
+            }
+            Depard = null;
+            Arrive = null;
+        }
     }
 }
