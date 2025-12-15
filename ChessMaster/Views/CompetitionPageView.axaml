@@ -22,14 +22,32 @@
         <Border
             Grid.Row="0"
             Grid.Column="0"
+            Padding="5">
+            <StackPanel Orientation="Horizontal">
+                <Button
+                    Command="{Binding ShowCompetitionsCommand}"
+                    FontSize="10"
+                    IsEnabled="{Binding !IsCompetitionVisible}">
+                    Return
+                </Button>
+            </StackPanel>
+        </Border>
+        <Border
+            Grid.Row="0"
+            Grid.Column="2"
             Padding="5"
-            IsVisible="{Binding !IsCompetitionVisible}">
-            <Button
-                Command="{Binding ShowCompetitionsCommand}"
-                FontSize="10"
-                IsVisible="{Binding !IsCompetitionVisible}">
-                Return
-            </Button>
+            IsVisible="{Binding IsCompetitionVisible}">
+            <StackPanel
+                Grid.Column="1"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+                <Button
+                    HorizontalAlignment="Right"
+                    Command="{Binding ShowNewCompetitionCommand}"
+                    FontSize="10">
+                    +
+                </Button>
+            </StackPanel>
         </Border>
         <TextBlock
             Grid.Row="1"
@@ -341,6 +359,54 @@
                     Command="{Binding NewMatchCommand}"
                     Content="Add Match" />
 
+            </Grid>
+        </Border>
+        <!--  Competition Adder  -->
+        <Border
+            Grid.Row="4"
+            Grid.ColumnSpan="3"
+            Padding="20"
+            Background="Brown"
+            CornerRadius="40"
+            IsVisible="{Binding IsNewCompetitionVisible}">
+            <Grid
+                HorizontalAlignment="Stretch"
+                ColumnDefinitions="*,*"
+                RowDefinitions="Auto,Auto,Auto">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalAlignment="Center"
+                    Content="Name" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Content="Date" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Width="150"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Text="{Binding NewCompetition_Name}"
+                    Watermark="Name" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="150"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Text="{Binding NewCompetition_Date}"
+                    Watermark="Date" />
+                <Button
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="10"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding AddCompetitionCommand}"
+                    Content="Create Competition" />
             </Grid>
         </Border>
     </Grid>

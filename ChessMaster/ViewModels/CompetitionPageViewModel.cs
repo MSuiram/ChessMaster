@@ -53,6 +53,8 @@ public partial class CompetitionPageViewModel : ViewModelBase
     [ObservableProperty]
     private bool? _isPlayerVisible = false;
     [ObservableProperty]
+    private bool? _isNewCompetitionVisible = false;
+    [ObservableProperty]
     private long _newMatch_Player1 = 0;
     [ObservableProperty]
     private long _newMatch_Player2 = 0;
@@ -60,15 +62,22 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private long _newMatch_ID;
     [ObservableProperty]
     private long? _newMatch_CompetitionID;
-
+    [ObservableProperty]
+    private string? _newCompetition_Name;
+    [ObservableProperty]
+    private string? _newCompetition_Date; 
+    private long NewCompetition_ID;
 
     [RelayCommand]
     private void NewMatch(CompetitionItemViewModel item)
     {
         NewMatch_ID = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
         Connexion.AddMatch(NewMatch_ID,NewMatch_Player1,NewMatch_Player2,NewMatch_CompetitionID);
-        IsNewMatchVisible = false;
-        IsCompetitionVisible = true;
+        IsPlayerVisible = false;
+        IsMatchVisible = false;
+        IsCompetitionVisible = false;
+        IsNewMatchVisible = true;
+        IsNewCompetitionVisible = false;
     }
     [RelayCommand]
     private void Search()
@@ -83,11 +92,13 @@ public partial class CompetitionPageViewModel : ViewModelBase
     }
     [RelayCommand]
     private void ShowCompetitions()
-    {
+    {   
+        Search();
         IsPlayerVisible = false;
         IsMatchVisible = false;
         IsCompetitionVisible = true;
         IsNewMatchVisible = false;
+        IsNewCompetitionVisible = false;
     }
     [RelayCommand]
     private void ShowPlayers(CompetitionItemViewModel item)
@@ -98,6 +109,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
         IsMatchVisible = false;
         IsCompetitionVisible = false;
         IsNewMatchVisible = false;
+        IsNewCompetitionVisible = false;
     }
     [RelayCommand]
     private void ShowMatches(CompetitionItemViewModel item)
@@ -107,6 +119,8 @@ public partial class CompetitionPageViewModel : ViewModelBase
         IsMatchVisible = true;
         IsCompetitionVisible = false;
         IsNewMatchVisible = false;
+        IsNewCompetitionVisible = false;
+
     }
     [RelayCommand]
     private void ShowNewMatch(CompetitionItemViewModel item)
@@ -116,6 +130,18 @@ public partial class CompetitionPageViewModel : ViewModelBase
         IsMatchVisible = false;
         IsCompetitionVisible = false;
         IsNewMatchVisible = true;
+        IsNewCompetitionVisible = false;
+
+    }
+    [RelayCommand]
+    private void ShowNewCompetition(CompetitionItemViewModel item)
+    {
+        IsPlayerVisible = false;
+        IsMatchVisible = false;
+        IsCompetitionVisible = false;
+        IsNewMatchVisible = false;
+        IsNewCompetitionVisible = true;
+
     }
     private void LoadCompetitionPlayers(long? ID)
     {
@@ -152,5 +178,17 @@ public partial class CompetitionPageViewModel : ViewModelBase
                 CompetitionMatch.Add(new CompetitionMatchItemViewModel() { Match_ID = Convert.ToInt64(row["ID"]), Match_Player_1 = Convert.ToInt64(row["Player_1"]), Match_Player_2 = Convert.ToInt64(row["Player_2"]), Match_Competition_ID = Convert.ToInt64(row["Competition_ID"]), Match_Coups = coups, Match_Winner_ID = winner });
             }
         }
+    }
+    [RelayCommand]
+    private void AddCompetition()
+    {
+        NewCompetition_ID = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+        Connexion.AddCompetition(NewCompetition_ID, NewCompetition_Name, NewCompetition_Date);
+        Search();
+        IsPlayerVisible = false;
+        IsMatchVisible = false;
+        IsCompetitionVisible = true;
+        IsNewMatchVisible = false;
+        IsNewCompetitionVisible = false;
     }
 }

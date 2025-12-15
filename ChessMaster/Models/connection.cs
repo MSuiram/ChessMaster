@@ -258,4 +258,21 @@ public static class Connexion
             var rowInserted = cmd.ExecuteNonQuery();
         }
     }
+    public static void AddCompetition(long? ID, string? Nom, string? Date)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Insert into Competition (ID, Nom, Date) values (@ID, @Nom, @Date)";
+
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@Nom", Nom);
+            cmd.Parameters.AddWithValue("@Date", Date);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
 }
