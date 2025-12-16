@@ -29,7 +29,10 @@ Cette application est destinée aux **administrateurs d’une fédération**, af
   - Senior (65 ans et plus)  
 
 # 3. Diagramme de classes
-![Texte alternatif](https://github.com/MSuiram/ChessMaster/blob/main/README.md "Diagramme de Classe")
+
+![alt text](ChessMaster/DiagrammeClasses.png?raw=true)
+
+![Texte alternatif](ChessMaster/DiagrammeClasses.png "Diagramme de Classe")
 
 # 4. Diagramme de séquence  
 
