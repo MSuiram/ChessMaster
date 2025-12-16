@@ -17,20 +17,24 @@
                 </Grid>  
             </Border>
             <Border Grid.Row="1" Padding="20" Background="Brown" CornerRadius="40">
+                <StackPanel>
+                <Label Content="Compétition en cours :" FontWeight="Bold"></Label>
                 <ScrollViewer>
                         <ItemsControl ItemsSource="{Binding HomeCompItems}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="vm:HomeCompetitionItemViewModel">
-                                    <Button HorizontalAlignment="Stretch" Command="" CommandParameter="">
-                                        <StackPanel Orientation="Horizontal">
-                                            <Label Width="200" Content="{Binding Id}"></Label>
-                                            <Label Width="100" Content="{Binding Name}"></Label>
-                                        </StackPanel>
-                                    </Button>
+                                    <StackPanel>
+                                        <Grid ColumnDefinitions="*,*,*">
+                                            <Label Grid.Column="0" Content="{Binding Id}"></Label>
+                                            <Label Grid.Column="1" Content="{Binding Name}"></Label>
+                                            <Label Grid.Column="2" Content="En Cours..."></Label>
+                                        </Grid>
+                                    </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </ScrollViewer>    
+                    </ScrollViewer>  
+                </StackPanel>  
             </Border>
         </Grid>
     </Border>
