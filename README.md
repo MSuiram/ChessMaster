@@ -30,8 +30,6 @@ Cette application est destinée aux **administrateurs d’une fédération**, af
 
 # 3. Diagramme de classes
 
-![alt text](ChessMaster/DiagrammeClasses.png?raw=true)
-
 ![Texte alternatif](ChessMaster/DiagrammeClasses.png "Diagramme de Classe")
 
 # 4. Diagramme de séquence  
