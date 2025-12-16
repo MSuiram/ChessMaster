@@ -1,31 +1,76 @@
-# 1. Introdution : 
-Dans le cadre du cours de Programmation en C#, nous avons du créer une application de gestion des matches et compétitions d'une fédération d'échecs! Celui-ci pourra être utilisé par les administrateurs d'une fédération quelconque afin d'y administrer ses joueurs, ainsi que les compétitions et matches à venir! 
+# 1. Introduction  
 
-# 2. Fonctionnalités : 
-##### 1. Home Page avec :
-   * Affichage des compétitions en cours
-   * Menu de navigation inter-pages
-##### 2. Page joueur avec :
-   * Possibilité de rechercher un joueur en particulier
-   * Possibilité de créer et ajouter un nouveau joueur a la db
-##### 3. Page Compétitions :
-   * Possibilité de rechercher une compétition en particulier/toutes les compétitions (champ vide)
-   * Afficher les joueurs d'une Compétition -> définir l'un d'entre eux comme gagnant de la compétition
-   * Afficher les matches d'une Compétition -> définir le gagnant d'un match, mettre a jour les ELO et enregistrer les coups des matches
-   * Créer une Compétition et y ajouter des matches
-##### 4. Page Classement (Fonctionnalité Bonus): 
-   * Affichage du Classement Elo en fonction de la tranche d'age Junior(0-17), Major(18-64)  et Senior(65+)
+Dans le cadre du cours de **Programmation en C#**, nous avons développé une application permettant la **gestion des compétitions et des matches d’une fédération d’échecs**.  
+Cette application est destinée aux **administrateurs d’une fédération**, afin de leur offrir un outil centralisé pour gérer les **joueurs**, les **compétitions** ainsi que les **matches à venir ou en cours**.
 
-# 3. Diagramme de Classe
-# 4. Diagramme de Séquence 
-# 5. Diagramme d'Activité
-# 6. Adaptabilité 
->Cette app ne se limite pas à l'usage dans le cadre des échecs. En effet, seul les coups sont une fonctionnalité exclusive aux échecs! Nous avons donc fait en sorte que ceux-ci ne soient pas obligatoires a l'enregistrement et la cloture d'un match afin de rendre l'application utilisable dans des cadres externes, la seule limite étant que les matches ne peuvent qu'être des 1v1! 
-# 7. Principes SOLID mis en avant 
-##### 1. Open/Closed Principle
->Chacune des fonctionnalités de cette application existe indépendement du reste de l'application! Ainsi, elles sont modifiables sans toucher au reste! De la même façon, il est possible de créer et ajouter de         nouvelles fonctionalités sans avoir a modifier l'environement qui acceuille celle-ci.
-##### 2. Single Responsability Principle
->A l'exeption de notre CompetitionViewModel, Chaque View Model ne s'occupe de la gestion que d'une seule page, permettant un découpage du code clair et évitant les classes avec trop de méthodes et variables! 		En effet, afin de gagner du temps, le CompetitionViewModel gère toutes les pages liées aux Compétitions, dont l'affichage n'est fonction que du paramètre IsVisible! On constate que de ce fait, cette 				Classe contient considérablement plus de variables et méthodes, la rendant moins claire et concise! 
+# 2. Fonctionnalités  
 
-# 8.Conclusion
->Nous avons mis en place une application permettant la gestion d'une fédération d'échec, ainsi que toute autre activité impliquant des matches 1v1! Celle-ci permet entre autres la gestion des adérants, et des évènements organisés par l'organisation ! De manière générale, nous avons essayé de sectionner et construire notre programme de façon à respecter au mieux le principes SOLID! Cependant, à posteriori, il est aisé de se rendre comptes des améliorations dans ce domaines qu'il pourrait etre apporté, tel que le redécoupage de la classe CompetitionViewModel! 
+## 2.1 Page d’accueil (Home Page)
+- Affichage des compétitions en cours  
+- Menu de navigation permettant l’accès aux différentes pages de l’application  
+
+## 2.2 Page Joueurs
+- Recherche d’un joueur spécifique  
+- Création et ajout de nouveaux joueurs dans la base de données  
+
+## 2.3 Page Compétitions
+- Recherche d’une compétition spécifique ou affichage de toutes les compétitions (champ de recherche vide)  
+- Affichage des joueurs d’une compétition et désignation du vainqueur  
+- Affichage des matches d’une compétition :
+  - Définition du gagnant d’un match  
+  - Mise à jour du classement **ELO**  
+  - Enregistrement des coups joués lors des matches  
+- Création d’une compétition et ajout de matches associés  
+
+## 2.4 Page Classement (fonctionnalité bonus)
+- Affichage du classement ELO par tranche d’âge :
+  - Junior (0–17 ans)  
+  - Major (18–64 ans)  
+  - Senior (65 ans et plus)  
+
+# 3. Diagramme de classes  
+
+*(À insérer)*
+
+# 4. Diagramme de séquence  
+
+*(À insérer)*
+
+
+# 5. Diagramme d’activité  
+
+*(À insérer)*
+
+
+# 6. Adaptabilité de l’application  
+
+Cette application ne se limite pas exclusivement au cadre des échecs. En effet, **la gestion des coups constitue la seule fonctionnalité spécifique à ce sport**.  
+Nous avons donc conçu le système de manière à rendre l’enregistrement des coups **optionnel**, afin de permettre la validation et la clôture d’un match sans ceux-ci.
+
+Ainsi, l’application peut être utilisée dans **d’autres contextes sportifs ou compétitifs**, à condition que les rencontres soient des **matches en un contre un (1v1)**.
+
+# 7. Principes SOLID mis en avant  
+
+## 7.1 Open/Closed Principle (OCP)
+
+Chaque fonctionnalité de l’application est conçue de manière **indépendante**. Cela permet de **modifier ou faire évoluer une fonctionnalité sans impacter le reste de l’application**.  
+De plus, il est possible d’**ajouter de nouvelles fonctionnalités** sans avoir à modifier l’environnement existant, ce qui respecte pleinement le principe *Open/Closed*.
+
+
+## 7.2 Single Responsibility Principle (SRP)
+
+À l’exception de la classe **CompetitionViewModel**, chaque *ViewModel* est responsable de la gestion d’**une seule page**.  
+Ce découpage favorise une structure de code claire, limite la complexité et évite les classes surchargées en méthodes et en variables.
+
+Cependant, dans un souci de gain de temps, le **CompetitionViewModel** centralise la gestion de toutes les pages liées aux compétitions, dont l’affichage dépend du paramètre `IsVisible`.  
+Cette approche entraîne une **augmentation significative du nombre de variables et de méthodes**, rendant la classe moins lisible et moins conforme au principe de responsabilité unique.
+
+
+# 8. Conclusion  
+
+Nous avons développé une application complète permettant la **gestion d’une fédération d’échecs**, tout en restant suffisamment flexible pour être utilisée dans d’autres contextes impliquant des matches **1v1**.  
+L’application offre notamment la gestion des adhérents, des compétitions et des événements organisés par la fédération.
+
+De manière générale, nous avons cherché à **structurer et segmenter notre application** afin de respecter au mieux les **principes SOLID**.  
+Néanmoins, une analyse a posteriori met en évidence plusieurs axes d’amélioration, notamment le **redécoupage de la classe CompetitionViewModel**, afin d’améliorer la lisibilité, la maintenabilité et le respect du principe de responsabilité unique.
+
