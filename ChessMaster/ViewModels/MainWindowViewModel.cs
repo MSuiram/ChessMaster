@@ -60,6 +60,7 @@ public partial class MainWindowViewModel : ViewModelBase, IRecipient<NavigationM
     public void GoToHome()
     {
         _messenger.Send(new NavigationMessage(_homePage));
+        _homePage.Search();
     }
     [RelayCommand]
     private void GoToPlayer()

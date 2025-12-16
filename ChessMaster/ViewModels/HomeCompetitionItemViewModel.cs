@@ -10,6 +10,8 @@ namespace ChessMaster.ViewModels;
 
 public partial class HomeCompetitionItemViewModel : HomePageViewModel
 {
+
+
     public HomeCompetitionItemViewModel() : base(WeakReferenceMessenger.Default)
     {
     }
@@ -19,4 +21,6 @@ public partial class HomeCompetitionItemViewModel : HomePageViewModel
         Id = item.Id;
         Name = item.Name;
     }
+
+
 }
