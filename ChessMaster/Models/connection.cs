@@ -4,6 +4,8 @@ using System.Data.SQLite;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Avalonia.Controls;
+using ChessMaster.ViewModels;
 using ExCSS;
 using Svg.Model.Drawables.Elements;
 
@@ -293,6 +295,22 @@ public static class Connexion
 
             query += "where ID = @ID";
             cmd.Parameters.AddWithValue("@ID", ID);
+
+            cmd.CommandText = query;
+
+            conn.Open();
+            var rowInserted = cmd.ExecuteNonQuery();
+        }
+    }
+    public static void ChangeCompetitionWinner(long winner_ID, long ID)
+    {
+        using (var conn = connection())
+        {
+            var cmd = new SQLiteCommand(conn);
+            string query = "Update Competition set Winner_ID =@winner_ID  where ID = @ID";
+
+            cmd.Parameters.AddWithValue("@ID", ID);
+            cmd.Parameters.AddWithValue("@winner_ID", winner_ID);
 
             cmd.CommandText = query;
 

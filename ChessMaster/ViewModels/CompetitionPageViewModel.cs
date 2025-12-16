@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading;
 using Avalonia.Controls;
@@ -72,14 +73,26 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private long NewCompetition_ID;
 
     [RelayCommand]
+    private void CompetitionWinner(CompetitionPlayerItemViewModel player)
+    {
+        Connexion.ChangeCompetitionWinner((long)player.Player_iD, (long)ID);
+        Search();
+        IsPlayerVisible = false;
+        IsMatchVisible = false;
+        IsCompetitionVisible = true;
+        IsNewMatchVisible = false;
+        IsNewCompetitionVisible = false;
+    }
+
+    [RelayCommand]
     private void NewMatch(CompetitionItemViewModel item)
     {
         NewMatch_ID = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
         Connexion.AddMatch(NewMatch_ID,NewMatch_Player1,NewMatch_Player2,NewMatch_CompetitionID);
         IsPlayerVisible = false;
         IsMatchVisible = false;
-        IsCompetitionVisible = false;
-        IsNewMatchVisible = true;
+        IsCompetitionVisible = true;
+        IsNewMatchVisible = false;
         IsNewCompetitionVisible = false;
     }
     [RelayCommand]
@@ -107,6 +120,7 @@ public partial class CompetitionPageViewModel : ViewModelBase
     private void ShowPlayers(CompetitionItemViewModel item)
     {
         Search();
+        ID = item.ID;
         LoadCompetitionPlayers(item.ID);
         IsPlayerVisible = true;
         IsMatchVisible = false;

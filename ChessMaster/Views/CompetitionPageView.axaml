@@ -139,7 +139,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:CompetitionItemViewModel">
                                 <Border>
-                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto,Auto">
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,Auto,Auto,Auto,Auto">
                                         <Label Grid.Column="0" Content="{Binding ID}" />
                                         <Label Grid.Column="1" Content="{Binding Name}" />
                                         <Label Grid.Column="2" Content="{Binding Winner}" />
@@ -296,7 +296,7 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="vm:CompetitionPlayerItemViewModel">
                                 <Border HorizontalAlignment="Stretch">
-                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*">
+                                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="*,*,*,*,*,*">
                                         <Label
                                             Grid.Column="0"
                                             Width="100"
@@ -317,6 +317,11 @@
                                             Grid.Column="4"
                                             Width="100"
                                             Content="{Binding Player_elo}" />
+                                        <Button
+                                            Grid.Column = "5"
+                                            Command="{Binding #Root.((vm:CompetitionPageViewModel)DataContext).CompetitionWinnerCommand}"
+                                            CommandParameter="{Binding}"
+                                            Content = "Add Winner"/>
                                     </Grid>
                                 </Border>
                             </DataTemplate>
