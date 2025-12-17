@@ -29,16 +29,12 @@ Cette application est destinée aux **administrateurs d’une fédération**, af
   - Senior (65 ans et plus)  
 
 # 3. Diagramme de classes
-
-![Texte alternatif](ChessMaster/DiagrammeClasses.png "Diagramme de Classe")
-
-# 4. Diagramme de séquence  
-
+Diagramme de Séquence mettant en avant l'affichage des compétitions ainsi que la création d'une d'entre elle
 ![Texte alternatif](ChessMaster/DiagrammeSéquence.png "Diagramme de Séquence")
 
 
 # 5. Diagramme d’activité  
-
+Diagramme d'Action mettant en avant la création d'une nouvelle compétition
 ![Texte alternatif](ChessMaster/DiagrammeAction.png "Diagramme d'Action")
 
 
