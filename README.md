@@ -34,7 +34,7 @@ Cette application est destinée aux **administrateurs d’une fédération**, af
 
 # 4. Diagramme de séquence  
 
-![Texte alternatif](ChessMaster/DiagrammeSequence.png "Diagramme de Séquence")
+![Texte alternatif](ChessMaster/DiagrammeSéquence.png "Diagramme de Séquence")
 
 
 # 5. Diagramme d’activité  
